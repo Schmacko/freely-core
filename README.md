@@ -23,7 +23,7 @@ Bitcoin-style integer halving results in a cumulative theoretical issuance of 20
 
 ## Current status
 
-This repository currently contains the project's initial documentation and a read-only environment-check script. It does **not** yet contain a FREELY daemon, wallet, genesis block, mining implementation, or running network.
+This repository contains the project's documentation foundation and read-only diagnostic/arithmetic scripts. It does **not** yet contain a FREELY daemon, wallet, genesis block, mining implementation, or running network.
 
 No public mainnet launch is authorised.
 
@@ -33,16 +33,19 @@ No public mainnet launch is authorised.
 - [Development roadmap](docs/ROADMAP.md)
 - [Security model](docs/SECURITY-MODEL.md)
 - [Development environment guide](docs/BUILD-GUIDE.md)
+- [Network identity plan](docs/NETWORK-IDENTITY-PLAN.md)
+- [Upstream baseline](docs/UPSTREAM-BASELINE.md)
 
-## Environment check
+## Diagnostic scripts
 
-From the repository root, run:
+Run from the repository root:
 
 ```bash
 bash scripts/environment-check.sh
+bash scripts/check-subsidy-schedule.sh
 ```
 
-The script is read-only. It does not install packages or modify files.
+Both scripts are intended to be read-only. The subsidy script checks the proposed integer-halving arithmetic; it is not yet a test of compiled consensus code.
 
 ## Upstream and licensing
 
