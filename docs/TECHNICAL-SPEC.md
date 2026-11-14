@@ -50,17 +50,9 @@ A low-hashrate FREELY network does not inherit Bitcoin's hashrate or security. S
 
 ## 5. Network identity — unresolved
 
-Before a usable network is created, the project must define and test:
+Before a usable network is created, the project must define and test the genesis block, P2P/RPC ports, message-start bytes, address prefixes, Bech32 HRP, data directories, configuration names, and separate testnet/regtest identities. DNS and fixed seeds must remain empty until independently operated nodes exist.
 
-- Genesis block, coinbase transaction and genesis hash.
-- Mainnet network magic and P2P port.
-- RPC configuration and safe access policy.
-- Base58 address prefixes and Bech32 human-readable prefix.
-- Data directory and configuration filename.
-- Separate testnet and regtest identities.
-- DNS seeds and fixed seeds, only when independently operated nodes exist.
-
-No Bitcoin mainnet identity values or peer endpoints may be reused for FREELY mainnet.
+No Bitcoin network identity values or peer endpoints may be reused for FREELY. The detailed selection and approval procedure is in [NETWORK-IDENTITY-PLAN.md](NETWORK-IDENTITY-PLAN.md). All identifiers remain TBD; none are approved or implemented.
 
 ## 6. Upstream source policy
 
