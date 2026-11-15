@@ -63,7 +63,8 @@ Required additional boundary assertions:
 - Height 420,000: 12.5 FLY.
 - Height 630,000: 6.25 FLY.
 - Height 1,260,000: 0.78125 FLY.
-- Height 13,440,000 (64 halvings): zero.
+- Height 6,720,000 (32 halvings): 0.00000001 FLY (one base unit).
+- Height 6,930,000 (33 halvings): zero; all later eras remain zero.
 
 ## 6. Minimal implementation sequence after the build gate
 
