@@ -87,3 +87,14 @@ Do not copy Bitcoin's historical activation heights, checkpoints, genesis block,
 - \`src/test/validation_tests.cpp\`
 
 All references above are pinned to the v32.1 tag. This document should be rechecked against the exact fetched source commit before implementation.
+
+## 8. Exact upstream pin
+
+The source baseline is pinned to the annotated Bitcoin Core v32.1 tag:
+
+- Tag: `v32.1`
+- Annotated tag object: `94f59fa45ea443882655625f4a647608274453e2`
+- Peeled source commit: `f0de87f040621468b956f01f526a43a010310501`
+- Tagger: fanquake, dated 2026-10-26.
+
+GitHub's tag object reports its PGP signature as verified. The FREELY baseline workflow separately imports the maintainer key, checks its configured primary fingerprint, and successfully completed the signed-tag verification step. The full build remains a separate gate; do not treat tag verification or CMake configuration as proof that compilation succeeded.
