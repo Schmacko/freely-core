@@ -35,6 +35,7 @@ No public mainnet launch is authorised.
 - [Development environment guide](docs/BUILD-GUIDE.md)
 - [Network identity plan](docs/NETWORK-IDENTITY-PLAN.md)
 - [Upstream baseline](docs/UPSTREAM-BASELINE.md)
+- [GitHub Actions build and cost controls](docs/GITHUB-ACTIONS.md)
 
 ## Diagnostic scripts
 
