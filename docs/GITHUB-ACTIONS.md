@@ -22,7 +22,7 @@ Public repository runner billing reference: https://docs.github.com/en/actions/c
 ## Activation
 
 1. Review this workflow in the FREELY pull request.
-2. Merge the pull request into `main) only after you approve it. A `workflow_dispatch` workflow must exist on the default branch before it can be manually dispatched.
+2. Merge the pull request into `main` only after you approve it. A `workflow_dispatch` workflow must exist on the default branch before it can be manually dispatched. The pull request is intentionally not merged by this workflow.
 3. In GitHub, open **Actions → FREELY upstream baseline build → Run workflow**.
 4. Select the `main` branch, set `run_build` to `true`, and start it.
 5. Review the run logs. A successful compile is not a security audit and does not establish that FREELY itself is ready for launch.
