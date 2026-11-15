@@ -29,6 +29,10 @@ Do not paste passwords, access tokens, private keys, or wallet seed phrases into
 - Use the smallest suitable machine.
 - Check current GitHub billing/usage information; quotas and policies can change.
 
+## Remote build option
+
+The repository now includes a manual GitHub Actions workflow for the unchanged upstream baseline. See [GITHUB-ACTIONS.md](GITHUB-ACTIONS.md) for its cost controls, signature verification, permissions and activation steps. It is deliberately manual-only and has not been run. The workflow must first be reviewed and merged to the default branch; no merge or run is performed automatically.
+
 ## Upstream source
 
 The proposed upstream baseline is Bitcoin Core `v32.1`. See [UPSTREAM-BASELINE.md](UPSTREAM-BASELINE.md) for provenance and references.
