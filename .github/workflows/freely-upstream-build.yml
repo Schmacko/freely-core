@@ -1,0 +1,92 @@
+name: FREELY upstream baseline build
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_build:
+        description: "Confirm: verify and build the unmodified Bitcoin Core v32.1 baseline"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: freely-upstream-baseline-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify-and-build:
+    if: inputs.run_build == true
+    name: Verify and build Bitcoin Core v32.1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Check out no FREELY code (upstream is fetched separately)
+        run: |
+          echo "Repository: ${GITHUB_REPOSITORY}"
+          echo "Ref: ${GITHUB_REF}"
+          echo "Runner: ${RUNNER_OS}"
+
+      - name: Install minimal upstream build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            build-essential cmake python3 libboost-dev gnupg curl ca-certificates git
+
+      - name: Import and verify Bitcoin Core maintainer key
+        env:
+          SIGNER_KEY_ID: 2EEB9F5CC09526C1
+          EXPECTED_PRIMARY_FINGERPRINT: E777299FC265DD04793070EB944D35F9AC3DB76A
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error \
+            https://raw.githubusercontent.com/bitcoin-core/guix.sigs/main/builder-keys/fanquake.gpg \
+            --output fanquake.gpg
+          gpg --batch --import fanquake.gpg
+          actual="$(gpg --batch --with-colons --fingerprint "${SIGNER_KEY_ID}" |
+            awk -F: '$1 == "fpr" { print $10; exit }')"
+          printf 'Expected primary fingerprint: %s\n' "${EXPECTED_PRIMARY_FINGERPRINT}"
+          printf 'Actual primary fingerprint:   %s\n' "${actual}"
+          test "${actual}" = "${EXPECTED_PRIMARY_FINGERPRINT}"
+
+      - name: Fetch and verify signed upstream tag
+        id: upstream
+        run: |
+          set -euo pipefail
+          git init bitcoin-upstream
+          cd bitcoin-upstream
+          git remote add origin https://github.com/bitcoin/bitcoin.git
+          git fetch --depth=1 origin refs/tags/v32.1:refs/tags/v32.1
+          git verify-tag v32.1 2>&1 | tee ../tag-verification.log
+          grep -F "Good signature" ../tag-verification.log
+          grep -F "2EEB9F5CC09526C1" ../tag-verification.log
+          commit="$(git rev-parse 'v32.1^{commit}')"
+          echo "commit=${commit}" >> "${GITHUB_OUTPUT}"
+          printf 'Verified upstream commit: %s\n' "${commit}"
+          git checkout --detach v32.1
+
+      - name: Configure unchanged node-only upstream
+        working-directory: bitcoin-upstream
+        run: |
+          cmake -B build \
+            -DENABLE_WALLET=OFF \
+            -DENABLE_IPC=OFF \
+            -DBUILD_GUI=OFF \
+            -DBUILD_TESTS=OFF \
+            -DBUILD_DAEMON=ON \
+            -DBUILD_CLI=ON
+
+      - name: Compile upstream with two jobs
+        working-directory: bitcoin-upstream
+        run: cmake --build build --parallel 2
+
+      - name: Confirm built binaries
+        working-directory: bitcoin-upstream
+        run: |
+          test -x build/bin/bitcoind
+          test -x build/bin/bitcoin-cli
+          build/bin/bitcoind --version
+          echo "SUCCESS: unchanged Bitcoin Core v32.1 node-only baseline compiled."
+          echo "Upstream commit: ${{ steps.upstream.outputs.commit }}"
