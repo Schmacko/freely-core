@@ -250,8 +250,9 @@
 | Formal consensus specification | Draft prepared |
 | Network identity | Candidate values only |
 | Chain-selection audit | [Draft PR #3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) |
-| Consensus specification / decision register | [Draft PR #2](https://github.com/Schmacko/freely-bitcoin-core./pull/2) |
+| Consensus specification / decision register | [Draft PR #2](https://github.com/Schmacko/freely-bitcoin-core./pull/2), head `73220edf6ad5d83dafb0998ec8cfb7fb9cbd44b2` |
 | Arithmetic checker CI | [Run #4 pending](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43787319274) |
+| M1 Windows correction head | `3c48e0fc2f3433a946ed29326c3c5233f4d826a3`; [general CI #34 pending](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43782087333), [M1 tests #16 pending](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43782087351) |
 | FREELY chain type / parameter object | Not implemented |
 | Chain-selection source audit | Prepared; [draft PR #3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) |
 | FREELY genesis | Not generated |
