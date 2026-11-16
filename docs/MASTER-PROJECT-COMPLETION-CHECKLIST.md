@@ -1,6 +1,6 @@
 # FREELY — Master Project Completion Checklist
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Created:** 16 November 2026  
 **Status:** Active engineering plan  
 **Pinned source baseline:** Bitcoin Core v32.1, commit `f0de87f040621468b956f01f526a43a010310501`  
