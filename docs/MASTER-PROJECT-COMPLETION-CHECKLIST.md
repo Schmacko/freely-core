@@ -1,6 +1,6 @@
 # FREELY — Master Project Completion Checklist
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Created:** 16 November 2026  
 **Status:** Active engineering plan  
 **Pinned source baseline:** Bitcoin Core v32.1, commit `f0de87f040621468b956f01f526a43a010310501`  
@@ -56,6 +56,8 @@
 - [x] Independently calculate scheduled issuance: 20,999,999.9769 FLY.
 - [x] Add C++ monetary boundary regression test scaffolding using explicit consensus params.
 - [x] Add draft detailed consensus specification and independent arithmetic checker.
+- [x] Add a consensus decision register with provisional recommendations and owner-approval gates.
+- [x] Add a read-only GitHub Actions workflow to syntax-check and execute the independent checker.
 - [x] Correct the final subsidy-era boundary vector in the independent checker (height 6,719,999 pays 2 base units; height 6,720,000 pays 1).
 - [ ] Decide and document whether the genesis coinbase is unspendable and how its 50 FLY is reflected in spendable-supply statements.
 - [ ] Freeze proof-of-work limit and initial difficulty / genesis nBits.
@@ -75,6 +77,7 @@
 ## Phase 3 — Chain identity and network isolation
 
 - [x] Audit all upstream chain-selector and parameter-factory integration points; document the safe implementation sequence.
+- [x] Publish the chain-selection audit as draft PR #3.
 - [ ] Finalize chain selector (candidate: `freely`) and config-section name.
 - [ ] Finalize unique data-directory suffix.
 - [ ] Collision-check and finalize 4-byte P2P message-start magic.
@@ -247,8 +250,10 @@
 | Formal consensus specification | Draft prepared |
 | Network identity | Candidate values only |
 | Chain-selection audit | [Draft PR #3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) |
+| Consensus specification / decision register | [Draft PR #2](https://github.com/Schmacko/freely-bitcoin-core./pull/2) |
+| Arithmetic checker CI | [Run #4 pending](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43787319274) |
 | FREELY chain type / parameter object | Not implemented |
-| Chain-selection source audit | Prepared; draft PR #3 |
+| Chain-selection source audit | Prepared; [draft PR #3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) |
 | FREELY genesis | Not generated |
 | Full FREELY consensus runtime | Not implemented |
 | Private multi-node network | Not started |
