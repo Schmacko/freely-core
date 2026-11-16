@@ -39,11 +39,14 @@
 
 **Verified result:** [FREELY M1 consensus test run #6 passed](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43662943218), commit `cd00a88a3bd60ee1831e3877518390643864846b`.
 
-**Scope limitation:** This is C++ regression-test and CI scaffolding. It does not yet implement a FREELY chain type or change runtime monetary consensus parameters.
+**Latest verified scope:** The dedicated validation suite passed on commit `68829ade95abd4f632f350d78afccb9db04a0ef5`. A subsequent Windows-safe checkout correction was committed as `3c48e0fc2f3433a946ed29326c3c5233f4d826a3`; its general CI run #34 and dedicated M1 run #16 are queued/pending. Do not treat the earlier pass as verification of the corrected head.
+
+**Scope limitation:** This is C++ regression-test, classification and CI scaffolding. It does not yet implement a FREELY chain type or change runtime monetary consensus parameters.
 
 ## M2 — FREELY chain identity and selection
 
 - [x] Document the required chain-selection integration points in the pinned source.
+- [x] Complete a static chain-selection/consensus integration audit and prepare a dedicated review PR.
 - [x] Prepare a provisional network-parameter sheet with clearly marked candidate values.
 - [ ] Review and finalize the network identity values before activation.
 - [ ] Add a dedicated `ChainType::FREELY` and string parsing/formatting.
@@ -54,6 +57,7 @@
 - [ ] Add chain-identity, genesis and cross-network isolation tests.
 
 **Current design references:**
+- [Chain-selection and consensus integration audit](https://github.com/Schmacko/freely-bitcoin-core./blob/freely/chain-selection-audit/docs/FREELY-CHAIN-SELECTION-AUDIT.md) (draft PR [#3](https://github.com/Schmacko/freely-bitcoin-core./pull/3)).
 - [Network architecture plan](https://github.com/Schmacko/freely-bitcoin-core./blob/freely/network-architecture/docs/FREELY-NETWORK-ARCHITECTURE.md)
 - [Provisional network parameter sheet](https://github.com/Schmacko/freely-bitcoin-core./blob/freely/network-architecture/docs/FREELY-NETWORK-PARAMETERS-DRAFT.md)
 
@@ -63,11 +67,15 @@
 
 - [x] Agree the monetary policy: 50 FLY initial subsidy, 210,000-block halvings, 8 decimals, 21m FLY hard ceiling.
 - [x] Verify the scheduled issuance arithmetic independently and with regression assertions.
+- [x] Publish the detailed consensus specification and independent checker; correct the final subsidy-era boundary vector (height 6,719,999 = 2 base units; 6,720,000 = 1 base unit).
+- [ ] Review and approve the remaining consensus-critical decisions (genesis accounting, PoW limit, retarget edge rules, minimum difficulty, time-warp mitigation and activation matrix).
 - [ ] Apply the monetary parameters to the actual FREELY chain-parameter object.
 - [ ] Specify and implement the production proof-of-work limit and initial difficulty.
 - [ ] Specify retarget clamping, timestamp rules and minimum-difficulty policy.
 - [ ] Audit activation heights, versionbits, buried deployments, checkpoints, assume-valid and minimum-chainwork.
 - [ ] Add consensus edge-case and invalid-block tests.
+
+**Design reference:** [FREELY consensus specification](https://github.com/Schmacko/freely-bitcoin-core./blob/freely/consensus-specification/docs/FREELY-CONSENSUS-SPECIFICATION.md), draft PR [#2](https://github.com/Schmacko/freely-bitcoin-core./pull/2).
 
 **Exit criteria:** The actual FREELY chain-parameter object and independent tests demonstrate the intended consensus behaviour.
 
