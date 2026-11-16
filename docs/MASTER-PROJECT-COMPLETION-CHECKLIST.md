@@ -1,6 +1,6 @@
 # FREELY — Master Project Completion Checklist
 
-**Version:** 1.3  
+**Version:** 1.4  
 **Created:** 16 November 2026  
 **Status:** Active engineering plan  
 **Pinned source baseline:** Bitcoin Core v32.1, commit `f0de87f040621468b956f01f526a43a010310501`  
@@ -8,13 +8,13 @@
 
 ## Completion dashboard — 16 November 2026
 
-**Checklist item completion: 22 / 156 = 14.1%.** This is the proportion of individually checked tasks in this document, not a claim that a working blockchain is 14.1% built. Completed planning, source-baseline and documentation tasks count; functional FREELY chain implementation has not yet begun.
+**Checklist item completion: 23 / 157 = 14.6%.** This is the proportion of individually checked tasks in this document, not a claim that a working blockchain is 14.1% built. Completed planning, source-baseline and documentation tasks count; functional FREELY chain implementation has not yet begun.
 
 | Phase | Checked / total | Checklist completion |
 |---|---:|---:|
 | 0. Governance and scope | 6 / 10 | 60% |
 | 1. Upstream baseline and engineering environment | 3 / 11 | 27% |
-| 2. Monetary policy and consensus specification | 11 / 23 | 48% |
+| 2. Monetary policy and consensus specification | 12 / 24 | 50% |
 | 3. Chain identity and network isolation | 2 / 17 | 12% |
 | 4. Genesis and chain parameters | 0 / 12 | 0% |
 | 5. Consensus implementation and validation | 0 / 13 | 0% |
@@ -25,7 +25,7 @@
 | 10. Public testnet gate | 0 / 10 | 0% — intentionally not authorised |
 | 11. Mainnet gate | 0 / 11 | 0% — intentionally not authorised |
 | 12. Post-launch maintenance | 0 / 8 | 0% — future phase |
-| **Total** | **22 / 156** | **14.1%** |
+| **Total** | **23 / 157** | **14.6%** |
 
 **Interpretation and controls**
 - Percentages are calculated mechanically from the checked boxes in the phase lists below.
@@ -87,6 +87,7 @@
 - [x] Add a consensus decision register with provisional recommendations and owner-approval gates.
 - [x] Add a read-only GitHub Actions workflow to syntax-check and execute the independent checker.
 - [x] Correct the final subsidy-era boundary vector in the independent checker (height 6,719,999 pays 2 base units; height 6,720,000 pays 1).
+- [x] Audit the pinned upstream proof-of-work and retarget implementation; document exact algorithm behaviour and FREELY test requirements in draft PR #4.
 - [ ] Decide and document whether the genesis coinbase is unspendable and how its 50 FLY is reflected in spendable-supply statements.
 - [ ] Freeze proof-of-work limit and initial difficulty / genesis nBits.
 - [ ] Freeze exact retarget algorithm, clamp bounds, integer rounding and timestamp selection.
@@ -273,14 +274,15 @@
 | Bitcoin Core v32.1 signed baseline | Verified |
 | Unchanged upstream Linux build | Passed |
 | M1 monetary/classification C++ regression suite | Passed on earlier commit |
-| Windows checkout correction | Committed; new CI verification pending |
+| Windows checkout correction | Checkout now succeeds in both Windows jobs on current head; native build/tests still in progress |
 | Dedicated M1 tests on correction commit | Pending |
 | Formal consensus specification | Draft prepared |
 | Network identity | Candidate values only |
 | Chain-selection audit | [Draft PR #3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) |
+| Proof-of-work / difficulty source audit | [Draft PR #4](https://github.com/Schmacko/freely-bitcoin-core./pull/4) |
 | Consensus specification / decision register | [Draft PR #2](https://github.com/Schmacko/freely-bitcoin-core./pull/2), head `73220edf6ad5d83dafb0998ec8cfb7fb9cbd44b2` |
 | Arithmetic checker CI | [Run #4 pending](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43787319274) |
-| M1 Windows correction head | `3c48e0fc2f3433a946ed29326c3c5233f4d826a3`; [general CI #34 pending](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43782087333), [M1 tests #16 pending](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43782087351) |
+| M1 Windows correction head | `3c48e0fc2f3433a946ed29326c3c5233f4d826a3`; [general CI #34 running](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43782087333), [M1 tests #16 queued](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43782087351); one unrelated no-wallet job failed due Docker Hub mirror HTTP 429 rate limiting |
 | FREELY chain type / parameter object | Not implemented |
 | Chain-selection source audit | Prepared; [draft PR #3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) |
 | FREELY genesis | Not generated |
@@ -300,3 +302,8 @@
 7. Mainnet launch.
 
 No approval is implied by this checklist. All reversible preparation and testing may proceed within the stated safety boundaries.
+
+
+## 14. Proof-of-work and difficulty source audit
+
+A separate documentation-only audit now maps the v32.1 PoW implementation: target derivation, 2,016-block retarget boundary, factor-of-four timespan clamp, minimum-difficulty exception, BIP94 period-start target handling, compact-target validation and PoW checks. See [FREELY PoW and difficulty audit](https://github.com/Schmacko/freely-bitcoin-core./blob/freely/pow-difficulty-audit/docs/FREELY-POW-DIFFICULTY-AUDIT.md) and [draft PR #4](https://github.com/Schmacko/freely-bitcoin-core./pull/4). This work does not choose the open FREELY PoW parameters or change runtime code.
