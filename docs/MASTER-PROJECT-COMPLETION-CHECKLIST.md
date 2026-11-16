@@ -50,29 +50,29 @@
 
 | Phase | Active effort | Calendar allowance | Notes |
 |---|---:|---:|---|
-| 0. Governance and scope | 10–18 h | 2–5 working days | Remaining decisions and governance |
-| 1. Upstream baseline and engineering environment | 36–70 h | 1–3 weeks | Full suites, CI repairs and reproducible builds |
-| 2. Monetary policy and consensus specification | 95–160 h | 3–6 weeks | Open consensus decisions and independent review |
-| 3. Chain identity and network isolation | 34–58 h | 2–4 weeks | Requires collision checks and finalized parameters |
-| 4. Genesis and chain parameters | 40–72 h | 2–4 weeks | Depends on frozen PoW, genesis and identity choices |
-| 5. Consensus implementation and validation | 68–112 h | 4–8 weeks | Highest-risk code and test phase |
-| 6. Wallet, RPC, mining and operations | 30–52 h | 2–4 weeks | Private-environment validation |
-| 7. Private multi-node network | 56–92 h | 3–6 weeks | Adversarial scenarios and remediation |
-| 8. Security, economics, legal and operations readiness | 64–112 h | 4–10+ weeks | External audit/legal review can dominate |
-| 9. Release engineering and documentation | 50–86 h | 3–6 weeks | Reproducible builds and complete handbook |
-| **Authorised scope, Phases 0–9** | **483–832 h** | **Approximately 5–9 months** | Sustained part-time progress, no major redesign |
-| 10. Public testnet (not authorised) | 36–68 h setup, plus 2–4 h/week | **At least 8–12 weeks operation** | Only after explicit approval; repeat cycles may be needed |
-| 11. Mainnet launch preparation (not authorised) | 76–136 h | **2–4+ months after testnet sign-off** | Depends on audit, legal readiness and independent operators |
+| 0. Governance and scope | 9–18 h | 2–5 working days | Remaining decisions and governance |
+| 1. Upstream baseline and engineering environment | 37–74 h | 1–3 weeks | Full suites, CI repairs and reproducible builds |
+| 2. Monetary policy and consensus specification | 96–192 h | 4–8 weeks | Open consensus decisions and independent review |
+| 3. Chain identity and network isolation | 35.5–71 h | 2–5 weeks | Requires collision checks and finalized parameters |
+| 4. Genesis and chain parameters | 40–80 h | 2–5 weeks | Depends on frozen PoW, genesis and identity choices |
+| 5. Consensus implementation and validation | 62–124 h | 4–9 weeks | Highest-risk code and test phase |
+| 6. Wallet, RPC, mining and operations | 30–60 h | 2–5 weeks | Private-environment validation |
+| 7. Private multi-node network | 54–108 h | 3–7 weeks | Adversarial scenarios and remediation |
+| 8. Security, economics, legal and operations readiness | 60–120 h | 4–12+ weeks | External audit/legal review can dominate |
+| 9. Release engineering and documentation | 50–100 h | 3–7 weeks | Reproducible builds and complete handbook |
+| **Authorised scope, Phases 0–9** | **Approximately 474–947 h** | **Approximately 6–12 months** | Sustained part-time progress, no major redesign; includes work that can overlap but excludes long external-review delays |
+| 10. Public testnet (not authorised) | 31–62 h setup, plus 2–4 h/week | **At least 8–12 weeks operation** | Only after explicit approval; repeat cycles may be needed |
+| 11. Mainnet launch preparation (not authorised) | 69–138 h | **2–4+ months after testnet sign-off** | Depends on audit, legal readiness and independent operators |
 | 12. Maintenance | Recurring | Ongoing | Not a finite phase |
 
-**Realistic project outlook:** the first usable engineering milestone—a reproducible private FREELY network with at least three isolated nodes, verified genesis, block production, wallet-to-wallet transaction transfer, reorganisation/invalid-block tests and documented build steps—is a **12–20 week** target from this plan. Completing all authorised pre-public-release work (Phases 0–9) is more realistically **5–9 months**. A public testnet would add at least **2–4 months** after separate approval. A mainnet, if ever approved, is more plausibly **9–18+ months from now**, not a promised date. Independent security review, legal review, external operators and funding can extend it or make it infeasible under a €0 budget.
+**Realistic project outlook:** the first usable engineering milestone—a reproducible private FREELY network with at least three isolated nodes, verified genesis, block production, wallet-to-wallet transaction transfer, reorganisation/invalid-block tests and documented build steps—is a **16–28 week (4–7 month)** target from this plan. Completing all authorised pre-public-release work (Phases 0–9) is more realistically **6–12 months**. A public testnet would add at least **2–4 months** after separate approval. A mainnet, if ever approved, is more plausibly **12–24+ months from now**, not a promised date. Independent security review, legal review, external operators and funding can extend it or make it infeasible under a €0 budget.
 
 ### Critical-path assumptions
 1. Current M1 CI/checkout work finishes without a major build-system redesign.
 2. Owner decisions on genesis accounting, PoW limit/genesis difficulty, BIP94 and script activations are made when evidence is ready.
 3. Consensus rules are not introduced without test vectors and independent review.
 4. CI and external review normally return within days, not weeks.
-5. Planning assumes roughly 15–25 productive hours/week. At 5–10 hours/week, expect about 9–15 months for Phases 0–9; at 30–40 hours/week, engineering time may compress but external review and test observation still impose minimum waits.
+5. Planning assumes roughly 15–25 productive hours/week. At 5–10 hours/week, expect about 12–24+ months for Phases 0–9; at 30–40 hours/week, engineering time may compress to roughly 4–8 months, but external review and test observation still impose minimum waits.
 6. Public testnet/mainnet work remains gated and is not included in the authorised completion estimate.
 
 ## How to use this checklist
