@@ -108,3 +108,10 @@
 - [ ] Explicit approval from the project owner.
 
 **No public testnet, mining deployment or mainnet launch is authorised by this roadmap.**
+
+
+## Latest source-audit milestone — 16 November 2026
+
+- [Draft PR #4: FREELY proof-of-work and difficulty audit](https://github.com/Schmacko/freely-bitcoin-core./pull/4) documents the pinned v32.1 PoW and retarget implementation, the 14-day target timespan implied by the agreed parameters, and the outstanding consensus decisions/test vectors.
+- The audit is documentation-only. It does not finalize `powLimit`, genesis `nBits`, minimum-difficulty policy, BIP94, or activate runtime chain code.
+- The complete task checklist is [v1.4](MASTER-PROJECT-COMPLETION-CHECKLIST.md); current checked-task count is 23/157 (14.6%).
