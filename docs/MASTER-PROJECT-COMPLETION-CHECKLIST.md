@@ -8,13 +8,13 @@
 
 ## Completion dashboard — 16 November 2026
 
-**Checklist item completion: 23 / 157 = 14.6%.** This is the proportion of individually checked tasks in this document, not a claim that a working blockchain is 14.1% built. Completed planning, source-baseline and documentation tasks count; functional FREELY chain implementation has not yet begun.
+**Checklist item completion: 25 / 157 = 15.9%.** This is the proportion of individually checked tasks in this document, not a claim that a working blockchain is 14.1% built. Completed planning, source-baseline and documentation tasks count; functional FREELY chain implementation has not yet begun.
 
 | Phase | Checked / total | Checklist completion |
 |---|---:|---:|
 | 0. Governance and scope | 6 / 10 | 60% |
 | 1. Upstream baseline and engineering environment | 3 / 11 | 27% |
-| 2. Monetary policy and consensus specification | 12 / 24 | 50% |
+| 2. Monetary policy and consensus specification | 14 / 24 | 58.3% |
 | 3. Chain identity and network isolation | 2 / 17 | 12% |
 | 4. Genesis and chain parameters | 0 / 12 | 0% |
 | 5. Consensus implementation and validation | 0 / 13 | 0% |
@@ -25,7 +25,7 @@
 | 10. Public testnet gate | 0 / 10 | 0% — intentionally not authorised |
 | 11. Mainnet gate | 0 / 11 | 0% — intentionally not authorised |
 | 12. Post-launch maintenance | 0 / 8 | 0% — future phase |
-| **Total** | **23 / 157** | **14.6%** |
+| **Total** | **25 / 157** | **15.9%** |
 
 **Interpretation and controls**
 - Percentages are calculated mechanically from the checked boxes in the phase lists below.
@@ -90,8 +90,8 @@
 - [x] Audit the pinned upstream proof-of-work and retarget implementation; document exact algorithm behaviour and FREELY test requirements in draft PR #4.
 - [ ] Decide and document whether the genesis coinbase is unspendable and how its 50 FLY is reflected in spendable-supply statements.
 - [ ] Freeze proof-of-work limit and initial difficulty / genesis nBits.
-- [ ] Freeze exact retarget algorithm, clamp bounds, integer rounding and timestamp selection.
-- [ ] Decide minimum-difficulty policy (production default should be explicitly chosen, not inherited accidentally).
+- [x] Approve and document exact production retarget policy: v32.1 semantics, 2,016-block period, 14-day timespan, ¼×–4× clamp and previous-period timestamp selection (owner approval 16 Nov 2026; implementation/tests pending).
+- [x] Approve minimum-difficulty disabled and no-retargeting disabled for production FREELY (owner approval 16 Nov 2026; implementation/tests pending).
 - [ ] Decide whether BIP94/time-warp mitigation is used and define exact semantics.
 - [ ] Freeze median-time-past and timestamp constraints.
 - [ ] Audit all consensus monetary range checks, fee paths, RPC conversion and wallet amount handling.
@@ -269,6 +269,8 @@
 
 ## Current verified position (16 November 2026)
 
+The production retarget/minimum-difficulty policy was explicitly approved by the owner on 16 November 2026 and documented in draft PR #5. This approval closes the policy-decision checklist items only; it does not mean FREELY retarget runtime code or tests have been implemented.
+
 | Item | Status |
 |---|---|
 | Bitcoin Core v32.1 signed baseline | Verified |
@@ -280,6 +282,7 @@
 | Network identity | Candidate values only |
 | Chain-selection audit | [Draft PR #3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) |
 | Proof-of-work / difficulty source audit | [Draft PR #4](https://github.com/Schmacko/freely-bitcoin-core./pull/4) |
+| Production retarget policy | Owner-approved 16 Nov 2026; [draft PR #5](https://github.com/Schmacko/freely-bitcoin-core./pull/5); runtime implementation/tests pending |
 | Consensus specification / decision register | [Draft PR #2](https://github.com/Schmacko/freely-bitcoin-core./pull/2), head `73220edf6ad5d83dafb0998ec8cfb7fb9cbd44b2` |
 | Arithmetic checker CI | [Run #4 pending](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43787319274) |
 | M1 Windows correction head | `3c48e0fc2f3433a946ed29326c3c5233f4d826a3`; [general CI #34 running](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43782087333), [M1 tests #16 queued](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43782087351); one unrelated no-wallet job failed due Docker Hub mirror HTTP 429 rate limiting |
