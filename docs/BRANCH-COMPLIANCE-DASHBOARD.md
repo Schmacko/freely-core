@@ -1,6 +1,6 @@
 # FREELY branch compliance dashboard
 
-**Snapshot:** 16 November 2026, 06:15 UTC  
+**Snapshot:** 16 November 2026, 06:14 UTC  
 **Purpose:** track completion of each branch's defined scope, not overall blockchain readiness.  
 **Rule:** draft documentation, queued CI and uncompiled code do not count as passed tests. No percentage is a security or launch-readiness score.
 
@@ -30,13 +30,15 @@ These are supporting workstreams and do not replace the five core branches.
 | `freely/chain-selection-audit` | Chain-selection integration audit | Draft PR #3; review pending |
 | `freely/pow-difficulty-audit` | PoW/difficulty source audit | Draft PR #4; review pending |
 | `freely/retarget-policy` | Owner-approved retarget policy recorded | Draft PR #5; runtime implementation/tests pending |
-| `freely/retarget-test-vectors` | Deterministic synthetic retarget vectors and C++ clamp-vector test | Draft PR #6; current-head CI queued |
+| `freely/retarget-test-vectors` | Deterministic synthetic retarget vectors and C++ clamp-vector test | Draft PR #6; C++ test and focused workflow committed; current-head CI queued |
 
 ## Current CI evidence
 
 - [FREELY M1 consensus tests, run 43814221505](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43814221505): queued; no test result yet.
 - [Inherited Bitcoin Core CI, run 43814222027](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43814222027): queued; 25 jobs.
-- [Retarget test-vectors CI, run 43815152242](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43815152242): queued.
+- [Focused FREELY retarget tests, run 43815278249](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43815278249): queued.
+- [Inherited CI, run 43815278235](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43815278235): queued.
+- [Inherited CI, run 43815273557](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43815273557): queued.
 - [Retarget test-vectors CI, run 43815146391](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43815146391): queued.
 
 The current queue is an external execution bottleneck. Do not describe it as a code failure or as a successful test. Avoid unnecessary commits that create duplicate CI matrices.
