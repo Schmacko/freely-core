@@ -1,10 +1,38 @@
 # FREELY — Master Project Completion Checklist
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Created:** 16 November 2026  
 **Status:** Active engineering plan  
 **Pinned source baseline:** Bitcoin Core v32.1, commit `f0de87f040621468b956f01f526a43a010310501`  
 **Repositories:** [Project coordination](https://github.com/Schmacko/freely-core) · [Bitcoin Core fork](https://github.com/Schmacko/freely-bitcoin-core.)
+
+## Completion dashboard — 16 November 2026
+
+**Checklist item completion: 22 / 156 = 14.1%.** This is the proportion of individually checked tasks in this document, not a claim that a working blockchain is 14.1% built. Completed planning, source-baseline and documentation tasks count; functional FREELY chain implementation has not yet begun.
+
+| Phase | Checked / total | Checklist completion |
+|---|---:|---:|
+| 0. Governance and scope | 6 / 10 | 60% |
+| 1. Upstream baseline and engineering environment | 3 / 11 | 27% |
+| 2. Monetary policy and consensus specification | 11 / 23 | 48% |
+| 3. Chain identity and network isolation | 2 / 17 | 12% |
+| 4. Genesis and chain parameters | 0 / 12 | 0% |
+| 5. Consensus implementation and validation | 0 / 13 | 0% |
+| 6. Wallet, RPC, mining and operations | 0 / 10 | 0% |
+| 7. Private multi-node network | 0 / 11 | 0% |
+| 8. Security, economics, legal and operations readiness | 0 / 10 | 0% |
+| 9. Release engineering and documentation | 0 / 10 | 0% |
+| 10. Public testnet gate | 0 / 10 | 0% — intentionally not authorised |
+| 11. Mainnet gate | 0 / 11 | 0% — intentionally not authorised |
+| 12. Post-launch maintenance | 0 / 8 | 0% — future phase |
+| **Total** | **22 / 156** | **14.1%** |
+
+**Interpretation and controls**
+- Percentages are calculated mechanically from the checked boxes in the phase lists below.
+- An item is checked only when evidence exists. Draft documentation, queued CI or unmerged PRs do not count as completed runtime implementation.
+- Phases 10 and 11 are approval-gated and must remain at 0% until the owner explicitly authorises those activities.
+- This is a task-progress metric, not a security, quality, network-readiness or launch-readiness score.
+- Phase percentages can change when tasks are added, split, removed or reclassified; preserve this counting method in future reports.
 
 ## How to use this checklist
 
