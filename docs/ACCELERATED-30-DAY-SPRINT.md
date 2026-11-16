@@ -147,3 +147,26 @@ No public testnet, public mining deployment, mainnet launch, paid infrastructure
 - Master checklist: 25/157 (15.9%), version 1.5.
 - Runtime FREELY chain type, final genesis, production PoW parameters and private multi-node network: not yet implemented.
 - DOCX handbook: not yet generated.
+
+
+## 10. Execution log — 16 November 2026, 03:46–03:48 UTC
+
+### Completed in sprint setup
+
+- Published this sprint plan to the coordination repository.
+- Confirmed M1 dedicated validation run #16 completed successfully on head `3c48e0fc2f3433a946ed29326c3c5233f4d826a3`: `test_bitcoin` compilation and `validation_tests` completed successfully.
+- Inspected M1 general CI run #34. Windows native, Windows fuzz, macOS native, macOS fuzz, lint and ASan/LSan/UBSan/integer jobs passed. Other jobs were still running or queued at this checkpoint.
+- Inspected the M1 “No wallet” job failure. The CI script failed while Docker attempted to retrieve `mirror.gcr.io/ubuntu:24.04`; the registry returned HTTP 429 Too Many Requests. This is an external image-registry rate-limit failure, not a source compilation/test failure. Revisit after the workflow reaches terminal state and retry only the failed infrastructure job if appropriate.
+- Created a separate test-contract branch `freely/retarget-test-vectors`, based on pinned upstream v32.1, and added deterministic compact-target vectors for the approved retarget clamp policy.
+- Opened draft PR [#6 — deterministic production retarget test vectors](https://github.com/Schmacko/freely-bitcoin-core./pull/6), head `abd4ccd3620b236f37c7ffa5f9113b7cc0e5fa06`. Its general CI run [#74](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43800123149) was queued at this checkpoint.
+- The retarget vectors are documentation-only and use explicitly synthetic test parameters. No runtime consensus code or production parameters have been changed.
+
+### Current checkpoint
+
+- PR #1 dedicated M1 tests: passed on exact corrected head.
+- PR #1 general CI: not terminal; one external registry rate-limit failure, multiple jobs still pending/running.
+- PR #2 consensus specification: CI queued.
+- PR #4 PoW/difficulty audit: CI queued.
+- PR #5 retarget policy: CI queued.
+- PR #6 retarget test-vector contract: CI queued.
+- No PR merge performed in this checkpoint; all merge gates remain in force.
