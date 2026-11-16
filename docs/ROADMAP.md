@@ -1,8 +1,10 @@
 # FREELY Development Roadmap
 
 **Status:** Active development. A milestone is complete only when its acceptance criteria are demonstrated and recorded.  
-**Last updated:** 15 November 2026  
+**Last updated:** 16 November 2026  
 **Upstream baseline:** Bitcoin Core v32.1, commit `f0de87f040621468b956f01f526a43a010310501`.
+
+> **Master execution plan:** See the [comprehensive FREELY Master Project Completion Checklist](MASTER-PROJECT-COMPLETION-CHECKLIST.md) for the full ordered delivery path from governance and baseline through consensus, private network, security, release and explicit public-launch gates.
 
 ## M0 — Project foundation
 
