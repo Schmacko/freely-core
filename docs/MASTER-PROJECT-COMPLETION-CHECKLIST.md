@@ -36,6 +36,7 @@
 - [x] Pin exact upstream commit `f0de87f040621468b956f01f526a43a010310501`.
 - [x] Build unchanged upstream `bitcoind` and `bitcoin-cli` on Ubuntu 24.04 in CI.
 - [ ] Run the complete relevant upstream unit and functional test suites on the pinned baseline.
+- [ ] Verify the Windows checkout correction on the current M1 PR head (new CI run is pending).
 - [ ] Reproduce the baseline build from a clean environment and record compiler/toolchain versions.
 - [ ] Resolve the fork's Windows CI checkout-path issue and verify native Windows build/test jobs on the corrected head.
 - [ ] Verify macOS and Linux CI on the exact implementation head.
@@ -55,6 +56,7 @@
 - [x] Independently calculate scheduled issuance: 20,999,999.9769 FLY.
 - [x] Add C++ monetary boundary regression test scaffolding using explicit consensus params.
 - [x] Add draft detailed consensus specification and independent arithmetic checker.
+- [x] Correct the final subsidy-era boundary vector in the independent checker (height 6,719,999 pays 2 base units; height 6,720,000 pays 1).
 - [ ] Decide and document whether the genesis coinbase is unspendable and how its 50 FLY is reflected in spendable-supply statements.
 - [ ] Freeze proof-of-work limit and initial difficulty / genesis nBits.
 - [ ] Freeze exact retarget algorithm, clamp bounds, integer rounding and timestamp selection.
@@ -72,6 +74,7 @@
 
 ## Phase 3 — Chain identity and network isolation
 
+- [x] Audit all upstream chain-selector and parameter-factory integration points; document the safe implementation sequence.
 - [ ] Finalize chain selector (candidate: `freely`) and config-section name.
 - [ ] Finalize unique data-directory suffix.
 - [ ] Collision-check and finalize 4-byte P2P message-start magic.
@@ -243,7 +246,9 @@
 | Dedicated M1 tests on correction commit | Pending |
 | Formal consensus specification | Draft prepared |
 | Network identity | Candidate values only |
+| Chain-selection audit | [Draft PR #3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) |
 | FREELY chain type / parameter object | Not implemented |
+| Chain-selection source audit | Prepared; draft PR #3 |
 | FREELY genesis | Not generated |
 | Full FREELY consensus runtime | Not implemented |
 | Private multi-node network | Not started |
