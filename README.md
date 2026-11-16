@@ -36,6 +36,8 @@ No public mainnet launch is authorised.
 - [Network identity plan](docs/NETWORK-IDENTITY-PLAN.md)
 - [Upstream baseline](docs/UPSTREAM-BASELINE.md)
 - [GitHub Actions build and cost controls](docs/GITHUB-ACTIONS.md)
+- [Branch compliance dashboard and acceleration priorities](docs/BRANCH-COMPLIANCE-DASHBOARD.md)
+- [30-day accelerated engineering sprint](docs/ACCELERATED-30-DAY-SPRINT.md)
 
 ## Diagnostic scripts
 
