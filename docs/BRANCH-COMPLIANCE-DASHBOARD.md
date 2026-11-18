@@ -107,3 +107,52 @@ The previously reported 41.7% overall and 79.7% branch-average figures are histo
 4. Continue the complete chain-type and production/test guard audit.
 5. Add runtime network-identity collision tests only after a dedicated FREELY parameter object can be tested without activating production settings.
 6. Keep the final PoW limit, initial difficulty, genesis timestamp/message and identity under the existing owner approval gates.
+
+
+## Live engineering refresh — 18 November 2026 (latest verified GitHub state)
+
+**Implementation repository:** `Schmacko/freely-bitcoin-core.`  
+**Coordination repository:** `Schmacko/freely-core`  
+**PR state:** 11 open, 11 draft, 0 merged. GitHub reports the PRs mergeable; this is not CI success or technical approval.
+
+### Current PR heads
+
+| PR | Workstream | Current head | State |
+|---:|---|---|---|
+| [#1](https://github.com/Schmacko/freely-bitcoin-core./pull/1) | M1 monetary policy | `e3f8f4df7fd2` | Draft |
+| [#2](https://github.com/Schmacko/freely-bitcoin-core./pull/2) | Consensus specification / genesis candidate | `1c839b9b8773` | Draft |
+| [#3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) | Chain-selection audit | `6b1443774a7b` | Draft |
+| [#4](https://github.com/Schmacko/freely-bitcoin-core./pull/4) | PoW/difficulty audit | `442ebbe77434` | Draft |
+| [#5](https://github.com/Schmacko/freely-bitcoin-core./pull/5) | Retarget policy | `226a5f83fe83` | Draft |
+| [#6](https://github.com/Schmacko/freely-bitcoin-core./pull/6) | Retarget/BIP94 tests | `fb4cb26b635e` | Draft |
+| [#7](https://github.com/Schmacko/freely-bitcoin-core./pull/7) | Network architecture | `7157d5ce9654` | Draft |
+| [#8](https://github.com/Schmacko/freely-bitcoin-core./pull/8) | Core chain integration | `a20399d39086` | Draft |
+| [#9](https://github.com/Schmacko/freely-bitcoin-core./pull/9) | CI Windows portability | `66a92038f423` | Draft |
+| [#10](https://github.com/Schmacko/freely-bitcoin-core./pull/10) | Network safety preflight | `b367050355d5` | Draft |
+| [#11](https://github.com/Schmacko/freely-bitcoin-core./pull/11) | Wallet/node readiness | `eab50e4ccb0d` | Draft |
+
+### Latest focused CI evidence
+
+| PR | Workflow run | Latest observed status |
+|---:|---|---|
+| #2 | [44210212065](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44210212065) | Queued |
+| #6 | [44200994415](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44200994415) | Pending; job queued |
+| #8 | [44211275120](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211275120) | Queued (latest head) |
+| #10 | [44210117086](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44210117086) | Queued |
+| #11 | [44211327838](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211327838) | Queued (latest head) |
+
+Jobs were inspected directly: all five focused jobs were still queued at the latest check. No current-head test pass is claimed. The queue is an external CI execution bottleneck; no evidence currently distinguishes a code failure because no job has run to completion.
+
+### Newly completed engineering work
+
+- **PR #8:** strengthened the binary-level startup regression test. It now starts with only `-chain=freely` and deliberately does not disable listening. This tests that FREELY fails closed even though upstream's default P2P listening setting is enabled. Commit: `a20399d39086c75dc895442e78130fb95993c747`.
+- **PR #11:** documented the source-level wallet address/key network-separation audit. Base58 P2PKH/P2SH, WIF, extended keys, and Bech32 HRP all derive from active chain parameters; mismatched Bech32 HRPs are rejected. No FREELY prefixes/HRP were assigned. Commit: `eab50e4ccb0d5ad836ca5a3aab3777cd8bf14c6d`.
+- **PR #6:** source-checked the BIP94 functional test against v32.1. The regtest-only `-test=bip94` option sets `enforce_BIP94`; the 601-second rejection reason `time-timewarp-attack` matches the validation path. This is source review, not a passing test.
+- **PR #8:** source audit confirms `GetNetworkForMagic()` intentionally recognises only the five built-in Bitcoin networks while FREELY has no approved magic. `SetupServerArgs()` constructs built-in parameter objects for static help/default descriptions; those MAIN references are not runtime selection of the active chain. FREELY factories still throw before node networking.
+- Existing PR #2 and #10 commits remain unchanged in this batch; their strict genesis-header validation and portable data-directory checks await CI execution.
+
+### Completion metrics and gates
+
+Do not raise project or branch percentages based on documentation or commits alone. Current evidence supports **code committed: yes** for the two changes above; **compiled: not verified**; **focused tests passed: 0 verified in this refresh**; **merged: 0 PRs**. Previous overall/branch percentage estimates remain historical and are not refreshed until current-head build/test evidence is terminal.
+
+Numeric `powLimit`, initial difficulty, final genesis timestamp/message/commitment, production network identity, and any public network activation remain unapproved. No public listener, DNS seed, testnet/mainnet launch, mining deployment, or paid infrastructure is authorised.
