@@ -161,3 +161,61 @@ Numeric `powLimit`, initial difficulty, final genesis timestamp/message/commitme
 ### PR #8 documentation follow-up
 
 The PR #8 safety-audit document was synchronised after the code/test commit. Latest PR head is now `e3fddb9e5a569047d5112482c19497732a80ac15`; the focused workflow [44211275120](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211275120) was triggered by the preceding code/test commit `a20399d39086c75dc895442e78130fb95993c747`. The follow-up commit changed documentation only, and no new workflow was triggered because the workflow's path filter does not include that audit document. The implementation tested by the queued run is unchanged. Do not describe it as a current-head pass until the queued run completes.
+
+
+## Live execution refresh — 18 November 2026 (current session)
+
+**Verification basis:** live GitHub PR metadata, branch references, focused workflow run metadata, and source reads from the current PR #8 implementation branch. This refresh supersedes the older run IDs/statuses above where they conflict.
+
+### Pull-request state
+
+| PR | Workstream | Head SHA | Base branch / base SHA | State |
+|---:|---|---|---|---|
+| [#1](https://github.com/Schmacko/freely-bitcoin-core./pull/1) | M1 monetary policy | `e3f8f4df7fd2` | `freely/upstream-v32.1` / `f0de87f04062` | Open, draft |
+| [#2](https://github.com/Schmacko/freely-bitcoin-core./pull/2) | Consensus specification / genesis | `1c839b9b8773` | `freely/upstream-v32.1` / `f0de87f04062` | Open, draft |
+| [#3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) | Chain-selection audit | `6b1443774a7b` | `freely/upstream-v32.1` / `f0de87f04062` | Open, draft |
+| [#4](https://github.com/Schmacko/freely-bitcoin-core./pull/4) | PoW/difficulty audit | `442ebbe77434` | `freely/upstream-v32.1` / `f0de87f04062` | Open, draft |
+| [#5](https://github.com/Schmacko/freely-bitcoin-core./pull/5) | Retarget policy | `226a5f83fe83` | `freely/upstream-v32.1` / `f0de87f04062` | Open, draft |
+| [#6](https://github.com/Schmacko/freely-bitcoin-core./pull/6) | Retarget/BIP94 tests | `fb4cb26b635e` | `freely/upstream-v32.1` / `f0de87f04062` | Open, draft |
+| [#7](https://github.com/Schmacko/freely-bitcoin-core./pull/7) | Network architecture | `7157d5ce9654` | `freely/upstream-v32.1` / `f0de87f04062` | Open, draft |
+| [#8](https://github.com/Schmacko/freely-bitcoin-core./pull/8) | Core chain integration | `e3fddb9e5a56` | `freely/m1-consensus` / `e3f8f4df7fd2` | Open, draft |
+| [#9](https://github.com/Schmacko/freely-bitcoin-core./pull/9) | Windows CI portability | `66a92038f423` | `freely/upstream-v32.1` / `f0de87f04062` | Open, draft |
+| [#10](https://github.com/Schmacko/freely-bitcoin-core./pull/10) | Network safety preflight | `b367050355d5` | `freely/upstream-v32.1` / `f0de87f04062` | Open, draft |
+| [#11](https://github.com/Schmacko/freely-bitcoin-core./pull/11) | Wallet/node readiness | `eab50e4ccb0d` | `freely/core-chain-implementation` / `8a10e4b88757` | Open, draft; base is behind current PR #8 head |
+
+All 11 PRs remain open and draft; none is merged. GitHub's mergeable flag is not a test or review approval. PR #11's recorded base SHA is behind the current PR #8 head and must be reconciled before integration. Its review threads and submitted reviews were empty at this inspection.
+
+### Current CI evidence
+
+- [PR #8 focused core-chain workflow, run 44211419468](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211419468): queued on head `e3fddb9e5a56`.
+- [PR #8 inherited CI, run 44211419033](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211419033): queued on head `e3fddb9e5a56`.
+- [PR #11 wallet/node workflow, run 44211327838](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211327838): queued on head `eab50e4ccb0d`.
+- [PR #11 inherited CI, run 44211327837](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211327837): queued on head `eab50e4ccb0d`.
+- [PR #2 consensus/genesis workflow, run 44210212065](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44210212065): queued on head `1c839b9b8773`.
+- [PR #10 network safety workflow, run 44210117086](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44210117086): queued on head `b367050355d5`.
+- [PR #6 retarget/BIP94 workflow, run 44200994415](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44200994415): pending at last known inspection; needs fresh job-level confirmation.
+
+The earlier PR #8 run `44211275120` was subsequently **cancelled** after a newer run was generated; it is not a code failure or a pass. No current-head focused test pass is verified in this refresh.
+
+### Work completed in this session
+
+- **PR #8:** extended `docs/FREELY-RPC-P2P-SAFETY-AUDIT.md` with a fresh source audit of `src/init.cpp`, `src/chainparams.cpp`, `src/chainparamsbase.cpp`, `src/chainparamsbase.h`, `src/net.cpp` and `src/rpc/server.cpp`. It clarifies that `ChainType::MAIN` constructions in `SetupServerArgs()` are static help/default metadata, not active-chain fallback; records the `-test` regtest-only guard; and documents RPC/P2P exposure and pre-activation tests still required. Commit: `2ee86445cc1e7c15d715f785e02fa1adeba295b4`.
+- **PR #8:** no production parameters, network identity, genesis activation, DNS seeds or public listener were added. Startup remains fail-closed.
+- **PR #11:** dependency gap identified: base SHA `8a10e4b88757` is behind PR #8 head `e3fddb9e5a56`. No rebase/update was attempted because the connector currently exposes PR base metadata but not a verified branch-update/rebase operation in this session.
+
+### Metrics and evidence discipline
+
+- Open draft PRs: **11/11**.
+- Merged PRs: **0/11**.
+- Current-head focused test passes verified in this session: **0**.
+- PR #8 source audit documentation: **committed** at `2ee86445cc1e7c15d715f785e02fa1adeba295b4`.
+- Full compilation on the latest PR #8 head: **not verified**.
+- Overall project and branch percentages: **not increased**. Documentation/source review alone does not establish compiled, runtime-tested or merged completion.
+
+### Handbook
+
+The latest available DOCX source remains handbook v1.3. A v1.4 DOCX was not created in this session because the document-generation capability was unavailable. Continue updating GitHub implementation documentation; only publish a new DOCX after file-generation capability returns and the file is verified.
+
+### Safety gates
+
+Numeric production `powLimit` and initial difficulty, final genesis header/time/message, network magic/ports/address prefixes/HRP, live FREELY RPC/P2P activation, public testnet/mainnet, DNS seeds, mining deployment and paid infrastructure remain outside this execution batch. No production values or network launch were activated.
