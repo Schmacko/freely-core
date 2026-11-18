@@ -49,9 +49,9 @@
 - [x] Complete a static chain-selection/consensus integration audit and prepare a dedicated review PR.
 - [x] Prepare a provisional network-parameter sheet with clearly marked candidate values.
 - [ ] Review and finalize the network identity values before activation.
-- [ ] Add a dedicated `ChainType::FREELY` and string parsing/formatting.
-- [ ] Add unique data-directory and RPC-port selection.
-- [ ] Add a dedicated FREELY chain-parameter object.
+- [x] Add a dedicated `ChainType::FREELY` and canonical string parsing/formatting (draft PR #8; runtime startup deliberately fails closed).
+- [ ] Add unique data-directory and RPC-port selection after final network identity approval.
+- [ ] Add a dedicated FREELY chain-parameter object after production consensus/genesis values are approved.
 - [ ] Add unique P2P magic and address/key prefixes.
 - [ ] Generate and independently verify a genesis block.
 - [ ] Add chain-identity, genesis and cross-network isolation tests.
@@ -68,7 +68,13 @@
 - [x] Agree the monetary policy: 50 FLY initial subsidy, 210,000-block halvings, 8 decimals, 21m FLY hard ceiling.
 - [x] Verify the scheduled issuance arithmetic independently and with regression assertions.
 - [x] Publish the detailed consensus specification and independent checker; correct the final subsidy-era boundary vector (height 6,719,999 = 2 base units; 6,720,000 = 1 base unit).
-- [ ] Review and approve the remaining consensus-critical decisions (genesis accounting, PoW limit, retarget edge rules, minimum difficulty, time-warp mitigation and activation matrix).
+- [x] Resolve genesis accounting: height-zero 50 FLY reward is permanently unspendable but included in scheduled issuance.
+- [x] Approve retarget policy: 600-second spacing, 2,016-block interval, 14-day target, 1/4–4x clamp, min-difficulty disabled, no-retargeting disabled.
+- [x] Approve BIP94 enabled from genesis, subject to code-path tests.
+- [x] Approve established Bitcoin script features active from genesis, subject to compatibility verification.
+- [ ] Approve numeric production `powLimit` and initial difficulty.
+- [ ] Finalize network identity and genesis timestamp/message/block commitment.
+- [ ] Complete runtime compatibility tests for the script activation matrix.
 - [ ] Apply the monetary parameters to the actual FREELY chain-parameter object.
 - [ ] Specify and implement the production proof-of-work limit and initial difficulty.
 - [ ] Specify retarget clamping, timestamp rules and minimum-difficulty policy.
@@ -115,3 +121,13 @@
 - [Draft PR #4: FREELY proof-of-work and difficulty audit](https://github.com/Schmacko/freely-bitcoin-core./pull/4) documents the pinned v32.1 PoW and retarget implementation, the 14-day target timespan implied by the agreed parameters, and the outstanding consensus decisions/test vectors.
 - The audit is documentation-only. It does not finalize `powLimit`, genesis `nBits`, minimum-difficulty policy, BIP94, or activate runtime chain code.
 - The complete task checklist is [v1.4](MASTER-PROJECT-COMPLETION-CHECKLIST.md); current checked-task count is 23/157 (14.6%).
+
+
+## Execution refresh — 18 November 2026
+
+- [Draft PR #8](https://github.com/Schmacko/freely-bitcoin-core./pull/8) now includes the canonical `ChainType::FREELY` selector, CLI chain label, fail-closed startup regression and focused workflow. This is still scaffolding, not a runnable FREELY node.
+- [Draft PR #10](https://github.com/Schmacko/freely-bitcoin-core./pull/10) now validates data-directory suffixes as a single safe portable path component and includes adversarial Windows/POSIX path fixtures. Latest focused workflow run #44210117086 is queued.
+- [Draft PR #2](https://github.com/Schmacko/freely-bitcoin-core./pull/2) now rejects malformed genesis header hex, invalid compact targets and targets above the supplied powLimit in its deterministic synthetic self-test. Latest focused workflow run #44210212065 is queued.
+- [Draft PR #6](https://github.com/Schmacko/freely-bitcoin-core./pull/6) includes the BIP94 period-start target and timestamp-boundary tests; current focused workflow remains pending.
+- [Draft PR #11](https://github.com/Schmacko/freely-bitcoin-core./pull/11) adds an upstream wallet compatibility suite, but the current focused workflow is queued and no FREELY-specific wallet is yet operational.
+- All 11 implementation PRs remain open and draft. No production parameters, public listeners, public network, mining deployment or launch have been activated.
