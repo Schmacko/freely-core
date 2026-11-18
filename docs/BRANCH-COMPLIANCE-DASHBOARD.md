@@ -226,3 +226,92 @@ Numeric production `powLimit` and initial difficulty, final genesis header/time/
 A subsequent job-level inspection shows the latest PR #8 runs are no longer queued: focused run [44211419468](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211419468) and inherited run [44211419033](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211419033) have both been **cancelled**. The cancellation does not establish a code failure or a pass. PR #11 focused wallet job [44211327838](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211327838), inherited CI [44211327837](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211327837), PR #2 run `44210212065`, PR #10 run `44210117086`, and PR #6 run `44200994415` were still queued at the latest job-level check. Current-head successful tests verified: **0**.
 
 A commit comparison confirms PR #8 is two commits ahead of PR #11's recorded base SHA `8a10e4b88757`: the changes are the fail-closed startup regression test and the RPC/P2P audit document. PR #11 cannot be considered fully reconciled until its head is updated to include these two commits without losing its wallet workflow and readiness documentation. No safe automatic rebase/update operation was available in this session, so the branch was left untouched.
+
+
+---
+
+## Live engineering execution update — 18 November 2026, 17:20 UTC
+
+**This section supersedes all earlier PR counts, head SHAs, workflow IDs and status statements above.** Earlier snapshots are retained as history and must not be read as current status.
+
+### Current PR inventory
+
+**12 PRs created · 10 open · 2 closed unmerged · 0 merged.** All 10 open PRs are drafts.
+
+| PR | Workstream | Current head | Current base | State |
+|---:|---|---|---|---|
+| [#1](https://github.com/Schmacko/freely-bitcoin-core./pull/1) | M1 monetary policy | `06d79002` | `freely/upstream-v32.1` | Open, draft |
+| [#2](https://github.com/Schmacko/freely-bitcoin-core./pull/2) | Consensus specification | `1c839b9b` | `freely/upstream-v32.1` | Open, draft |
+| [#3](https://github.com/Schmacko/freely-bitcoin-core./pull/3) | Chain-selection audit | `d4b6ad2d` | `freely/upstream-v32.1` | Closed, unmerged; superseded by #12 |
+| [#4](https://github.com/Schmacko/freely-bitcoin-core./pull/4) | PoW/difficulty audit | `442ebbe7` | `freely/upstream-v32.1` | Open, draft |
+| [#5](https://github.com/Schmacko/freely-bitcoin-core./pull/5) | Retarget policy | `96288f54` | `freely/upstream-v32.1` | Open, draft |
+| [#6](https://github.com/Schmacko/freely-bitcoin-core./pull/6) | Retarget/BIP94 tests | `fb4cb26b` | `freely/upstream-v32.1` | Open, draft |
+| [#7](https://github.com/Schmacko/freely-bitcoin-core./pull/7) | Network architecture | `7157d5ce` | `freely/upstream-v32.1` | Closed, unmerged; superseded by #12 |
+| [#8](https://github.com/Schmacko/freely-bitcoin-core./pull/8) | Core chain implementation | `5f8fa282` | `freely/m1-consensus` @ `06d79002` | Open, draft |
+| [#9](https://github.com/Schmacko/freely-bitcoin-core./pull/9) | Windows CI portability | `66a92038` | `freely/upstream-v32.1` | Reopened, draft |
+| [#10](https://github.com/Schmacko/freely-bitcoin-core./pull/10) | Network safety preflight | `344e7ed3` | `freely/upstream-v32.1` | Open, draft |
+| [#11](https://github.com/Schmacko/freely-bitcoin-core./pull/11) | Wallet/node readiness | `3cc61bad` | `freely/core-chain-implementation` @ `5f8fa282` | Open, draft |
+| [#12](https://github.com/Schmacko/freely-bitcoin-core./pull/12) | Consolidated docs/specification | `ad93aa6e` | `freely/upstream-v32.1` | Open, draft |
+
+### Dependency status
+
+- PR #8 is based on the current PR #1 head.
+- PR #11 is based on the current PR #8 head; the previously identified three-commit mismatch is reconciled.
+- PR #12 consolidates consensus specification, network architecture and chain-selection audit documents previously spread across PRs #2, #3 and #7. PR #3 and #7 were closed unmerged after their source-of-truth content was carried into #12.
+- PR #9 was reopened because its Windows checkout and no-wallet container fixes remain independently useful and had not been merged elsewhere.
+
+### New source-of-truth correction
+
+PR #12's chain-selection audit contained stale language saying the project still had to decide whether genesis had a reward output. This contradicted the owner's 17 November decision. The wording was corrected to state:
+- the 50 FLY height-zero subsidy remains in scheduled issuance accounting;
+- the genesis coinbase is permanently unspendable and excluded from spendable supply;
+- the current OP_RETURN transaction is only a candidate, not an activated genesis commitment.
+
+Correction commit: `ad93aa6e970b770e8fed899931c13fb2d6c6ab10`.
+
+### Current exact-head CI evidence
+
+| Workstream | Run | Head | Status at 17:20 UTC |
+|---|---:|---|---|
+| PR #9 inherited CI | [44357357887](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44357357887) | `66a92038` | Pending; 25 jobs queued |
+| PR #12 focused consensus checks | [44357328594](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44357328594) | `ad93aa6e` | Queued |
+| PR #12 inherited CI | [44357328605](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44357328605) | `ad93aa6e` | Queued |
+| PR #11 wallet/node | [44318647471](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44318647471) | `3cc61bad` | Queued |
+| PR #10 network safety | [44320905289](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44320905289) | `344e7ed3` | Queued |
+| PR #6 retarget/BIP94 | [44200994415](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44200994415) | `fb4cb26b` | Queued |
+
+The PR #9 and #12 job lists were inspected directly. PR #9 has 25 inherited jobs queued; PR #12 focused consensus job is queued. PR #11, #10 and #6 each have their single focused job queued. There are no current-head successful tests or confirmed builds in this inspection. Cancelled older runs are not passes or failures.
+
+### Work completed in this execution
+
+- Reconciled PR #12 chain-selection audit with the owner-approved genesis accounting; committed `ad93aa6e970b770e8fed899931c13fb2d6c6ab10`.
+- Reopened PR #9 to preserve the Windows-safe checkout, vcpkg cache-key and no-wallet container-image fixes. The PR remains draft; current-head CI is pending.
+- Reconfirmed PR #8 → #1 and PR #11 → #8 dependency alignment.
+- Reviewed the PR #6 BIP94 functional test and C++ retarget fixtures against their documented purpose. The source-level review is not a substitute for CI execution.
+- Updated PR #12's description with the correction and current exact-head workflow references.
+
+### Metrics discipline
+
+Do not carry forward the previous 80% five-branch mean, 27% whole-project estimate, or 81% branch average as a live completion score. Those numbers were produced from older scopes and inconsistent denominators. Recalculate only after a branch-by-branch acceptance audit that separates:
+1. code committed;
+2. code compiled on exact head;
+3. focused tests passed on exact head;
+4. full CI passed;
+5. reviewed;
+6. merged.
+
+Current verified measures for this refresh: code/documentation commit made: yes; current-head successful focused runs: 0; current-head builds verified: 0; merged PRs: 0.
+
+### Remaining priorities
+
+1. Obtain terminal results for PR #9, #12, #11, #10 and #6 exact-head workflows; inspect job logs and distinguish code defects from runner/queue failures.
+2. Reconcile any portability findings from PR #9 before considering merge.
+3. Complete the full `ChainType::MAIN` call-site audit and verify production/test override guards.
+4. Expand genesis candidate checks and independently validate the transaction/header commitment after parameters are approved.
+5. Continue wallet/node functional coverage, without claiming FREELY-specific addresses or a live FREELY chain.
+6. Recalculate branch compliance from explicit acceptance criteria.
+7. Update the implementation handbook only when the document-generation tool is available; no new DOCX version is claimed in this execution.
+
+### Safety gates
+
+Numeric production `powLimit`, initial difficulty, final network identity, final genesis commitment and exact script activation matrix remain unresolved. Keep FREELY startup fail-closed. No public testnet/mainnet launch, mining deployment, DNS seeds, public listener, paid infrastructure or irreversible deployment is authorised.
