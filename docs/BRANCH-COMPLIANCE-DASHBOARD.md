@@ -219,3 +219,10 @@ The latest available DOCX source remains handbook v1.3. A v1.4 DOCX was not crea
 ### Safety gates
 
 Numeric production `powLimit` and initial difficulty, final genesis header/time/message, network magic/ports/address prefixes/HRP, live FREELY RPC/P2P activation, public testnet/mainnet, DNS seeds, mining deployment and paid infrastructure remain outside this execution batch. No production values or network launch were activated.
+
+
+### CI status correction — latest job-level recheck
+
+A subsequent job-level inspection shows the latest PR #8 runs are no longer queued: focused run [44211419468](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211419468) and inherited run [44211419033](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211419033) have both been **cancelled**. The cancellation does not establish a code failure or a pass. PR #11 focused wallet job [44211327838](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211327838), inherited CI [44211327837](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44211327837), PR #2 run `44210212065`, PR #10 run `44210117086`, and PR #6 run `44200994415` were still queued at the latest job-level check. Current-head successful tests verified: **0**.
+
+A commit comparison confirms PR #8 is two commits ahead of PR #11's recorded base SHA `8a10e4b88757`: the changes are the fail-closed startup regression test and the RPC/P2P audit document. PR #11 cannot be considered fully reconciled until its head is updated to include these two commits without losing its wallet workflow and readiness documentation. No safe automatic rebase/update operation was available in this session, so the branch was left untouched.
