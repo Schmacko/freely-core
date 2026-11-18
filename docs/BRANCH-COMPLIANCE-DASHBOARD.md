@@ -315,3 +315,10 @@ Current verified measures for this refresh: code/documentation commit made: yes;
 ### Safety gates
 
 Numeric production `powLimit`, initial difficulty, final network identity, final genesis commitment and exact script activation matrix remain unresolved. Keep FREELY startup fail-closed. No public testnet/mainnet launch, mining deployment, DNS seeds, public listener, paid infrastructure or irreversible deployment is authorised.
+
+
+### PR consolidation correction — 18 November 2026, 17:22 UTC
+
+After verifying that PR #12 carries the exact PR #2 consensus-specification head and its complete specification/generator/workflow file set, PR #2 was closed unmerged to avoid duplicate review and CI. PR #12 is the sole consolidated review target for that work. PR #3 and #7 remain closed unmerged as previously recorded; PR #9 remains reopened for the independent CI portability fixes.
+
+**Corrected inventory:** 12 PRs created · 9 open · 3 closed unmerged · 0 merged. All 9 open PRs are drafts. No source implementation is discarded by this consolidation, and no production parameters are activated.
