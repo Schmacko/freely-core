@@ -23,7 +23,7 @@ Bitcoin-style integer halving results in a cumulative theoretical issuance of 20
 
 ## Current status
 
-This repository contains the project's documentation foundation and read-only diagnostic/arithmetic scripts. It does **not** yet contain a FREELY daemon, wallet, genesis block, mining implementation, or running network.
+This coordination repository contains the project's documentation foundation and read-only diagnostic/arithmetic scripts. The separate Bitcoin Core fork now contains a draft `ChainType::FREELY` selector and fail-closed startup scaffolding, but it does **not** yet contain a runnable FREELY daemon, FREELY-specific wallet/network parameters, a finalized genesis block, or a running network.
 
 No public mainnet launch is authorised.
 
@@ -36,6 +36,8 @@ No public mainnet launch is authorised.
 - [Network identity plan](docs/NETWORK-IDENTITY-PLAN.md)
 - [Upstream baseline](docs/UPSTREAM-BASELINE.md)
 - [GitHub Actions build and cost controls](docs/GITHUB-ACTIONS.md)
+- [Branch compliance dashboard and acceleration priorities](docs/BRANCH-COMPLIANCE-DASHBOARD.md)
+- [30-day accelerated engineering sprint](docs/ACCELERATED-30-DAY-SPRINT.md)
 
 ## Diagnostic scripts
 

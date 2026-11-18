@@ -1,68 +1,133 @@
 # FREELY Development Roadmap
 
-**Status:** Draft. A milestone is complete only when its acceptance criteria are demonstrated and recorded.
+**Status:** Active development. A milestone is complete only when its acceptance criteria are demonstrated and recorded.  
+**Last updated:** 16 November 2026  
+**Upstream baseline:** Bitcoin Core v32.1, commit `f0de87f040621468b956f01f526a43a010310501`.
+
+> **Master execution plan:** See the [comprehensive FREELY Master Project Completion Checklist](MASTER-PROJECT-COMPLETION-CHECKLIST.md) for the full ordered delivery path from governance and baseline through consensus, private network, security, release and explicit public-launch gates.
 
 ## M0 — Project foundation
 
-- [x] Create repository.
-- [x] Establish initial monetary and architecture proposal.
-- [ ] Add project documentation and environment checks.
-- [ ] Record upstream source tag, verified signature and exact commit.
+- [x] Create the project repository and establish the independent SHA-256d UTXO-chain goal.
+- [x] Record initial monetary policy and architecture decisions.
+- [x] Add project documentation, build notes, security model and implementation roadmap.
+- [x] Select and pin Bitcoin Core v32.1.
+- [x] Verify the signed upstream tag in the GitHub Actions baseline workflow.
 
-**Exit criteria:** Documentation is committed; repository status and development environment are understood.
+**Exit criteria:** Met for project foundation and source pinning.
 
 ## M1 — Upstream baseline
 
-- [ ] Verify the selected Bitcoin Core tag signature using trusted keys.
-- [ ] Pin the exact upstream commit.
-- [ ] Configure a clean build environment.
-- [ ] Build upstream unchanged.
-- [ ] Run the upstream test suite and record results.
+- [x] Verify the selected Bitcoin Core tag signature using the configured maintainer key fingerprint.
+- [x] Pin the exact upstream commit: `f0de87f040621468b956f01f526a43a010310501`.
+- [x] Configure a clean Ubuntu 24.04 GitHub Actions build environment.
+- [x] Build unchanged upstream `bitcoind` and `bitcoin-cli` successfully.
+- [ ] Run and record the complete relevant upstream test suite.
 
-**Exit criteria:** A clean, documented upstream build and test run.
+**Verified result:** The unchanged Bitcoin Core v32.1 baseline build passed in GitHub Actions. This is an upstream baseline build, not a FREELY runtime build.
 
-## M2 — FREELY chain identity
+**Exit criteria:** Baseline compilation is met; full upstream test-suite evidence remains outstanding.
 
-- [ ] Define unique network magic, ports and address prefixes.
-- [ ] Define independent genesis block and verify its hash.
-- [ ] Separate mainnet, testnet and regtest parameters.
-- [ ] Add identity and cross-network isolation tests.
+## M1A — FREELY monetary-policy regression scaffolding
 
-**Exit criteria:** FREELY nodes identify only the intended FREELY network.
+- [x] Add explicit-parameter C++ subsidy tests for the 50 FLY / 210,000-block halving schedule.
+- [x] Check selected halving boundaries, the final one-base-unit reward and the transition to zero.
+- [x] Check cumulative scheduled issuance equals 2,099,999,997,690,000 base units (20,999,999.9769 FLY).
+- [x] Replace implicit test-chain classification with an explicit flag for existing Bitcoin networks.
+- [x] Add regression coverage for MAIN, TESTNET, TESTNET4, SIGNET and REGTEST classification.
+- [x] Build `test_bitcoin` and run the `validation_tests` CTest suite successfully.
 
-## M3 — Monetary and consensus implementation
+**Verified result:** [FREELY M1 consensus test run #6 passed](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43662943218), commit `cd00a88a3bd60ee1831e3877518390643864846b`.
 
-- [ ] Implement the agreed FLY subsidy schedule.
-- [ ] Verify all halving boundaries and cumulative issuance.
-- [ ] Verify proof-of-work limit and difficulty rules.
-- [ ] Add regression tests for consensus edge cases.
+**Latest verified scope:** The dedicated validation suite passed on commit `68829ade95abd4f632f350d78afccb9db04a0ef5`. A subsequent Windows-safe checkout correction was committed as `3c48e0fc2f3433a946ed29326c3c5233f4d826a3`; its general CI run #34 and dedicated M1 run #16 are queued/pending. Do not treat the earlier pass as verification of the corrected head.
 
-**Exit criteria:** Independent tests demonstrate the intended consensus behaviour.
+**Scope limitation:** This is C++ regression-test, classification and CI scaffolding. It does not yet implement a FREELY chain type or change runtime monetary consensus parameters.
+
+## M2 — FREELY chain identity and selection
+
+- [x] Document the required chain-selection integration points in the pinned source.
+- [x] Complete a static chain-selection/consensus integration audit and prepare a dedicated review PR.
+- [x] Prepare a provisional network-parameter sheet with clearly marked candidate values.
+- [ ] Review and finalize the network identity values before activation.
+- [x] Add a dedicated `ChainType::FREELY` and canonical string parsing/formatting (draft PR #8; runtime startup deliberately fails closed).
+- [ ] Add unique data-directory and RPC-port selection after final network identity approval.
+- [ ] Add a dedicated FREELY chain-parameter object after production consensus/genesis values are approved.
+- [ ] Add unique P2P magic and address/key prefixes.
+- [ ] Generate and independently verify a genesis block.
+- [ ] Add chain-identity, genesis and cross-network isolation tests.
+
+**Current design references:**
+- [Chain-selection and consensus integration audit](https://github.com/Schmacko/freely-bitcoin-core./blob/freely/chain-selection-audit/docs/FREELY-CHAIN-SELECTION-AUDIT.md) (draft PR [#3](https://github.com/Schmacko/freely-bitcoin-core./pull/3)).
+- [Network architecture plan](https://github.com/Schmacko/freely-bitcoin-core./blob/freely/network-architecture/docs/FREELY-NETWORK-ARCHITECTURE.md)
+- [Provisional network parameter sheet](https://github.com/Schmacko/freely-bitcoin-core./blob/freely/network-architecture/docs/FREELY-NETWORK-PARAMETERS-DRAFT.md)
+
+**Exit criteria:** FREELY nodes identify only the intended FREELY network and cannot accidentally join a Bitcoin network.
+
+## M3 — FREELY consensus implementation
+
+- [x] Agree the monetary policy: 50 FLY initial subsidy, 210,000-block halvings, 8 decimals, 21m FLY hard ceiling.
+- [x] Verify the scheduled issuance arithmetic independently and with regression assertions.
+- [x] Publish the detailed consensus specification and independent checker; correct the final subsidy-era boundary vector (height 6,719,999 = 2 base units; 6,720,000 = 1 base unit).
+- [x] Resolve genesis accounting: height-zero 50 FLY reward is permanently unspendable but included in scheduled issuance.
+- [x] Approve retarget policy: 600-second spacing, 2,016-block interval, 14-day target, 1/4–4x clamp, min-difficulty disabled, no-retargeting disabled.
+- [x] Approve BIP94 enabled from genesis, subject to code-path tests.
+- [x] Approve established Bitcoin script features active from genesis, subject to compatibility verification.
+- [ ] Approve numeric production `powLimit` and initial difficulty.
+- [ ] Finalize network identity and genesis timestamp/message/block commitment.
+- [ ] Complete runtime compatibility tests for the script activation matrix.
+- [ ] Apply the monetary parameters to the actual FREELY chain-parameter object.
+- [ ] Specify and implement the production proof-of-work limit and initial difficulty.
+- [ ] Specify retarget clamping, timestamp rules and minimum-difficulty policy.
+- [ ] Audit activation heights, versionbits, buried deployments, checkpoints, assume-valid and minimum-chainwork.
+- [ ] Add consensus edge-case and invalid-block tests.
+
+**Design reference:** [FREELY consensus specification](https://github.com/Schmacko/freely-bitcoin-core./blob/freely/consensus-specification/docs/FREELY-CONSENSUS-SPECIFICATION.md), draft PR [#2](https://github.com/Schmacko/freely-bitcoin-core./pull/2).
+
+**Exit criteria:** The actual FREELY chain-parameter object and independent tests demonstrate the intended consensus behaviour.
 
 ## M4 — Private development network
 
-- [ ] Run at least three independently configured nodes.
+- [ ] Run at least three independently configured local nodes.
 - [ ] Mine blocks and verify propagation.
 - [ ] Send and confirm transactions.
-- [ ] Test restarts, synchronization, reorganization and invalid-block rejection.
+- [ ] Test restarts, synchronization, reorganizations and invalid-block rejection.
+- [ ] Verify network isolation and wallet/address interoperability.
 
-**Exit criteria:** Repeatable private-network test report.
+**Exit criteria:** Repeatable private-network test report. No public peers or public launch are implied.
 
-## M5 — Public testnet
+## M5 — Public testnet decision gate
 
 - [ ] Complete code review and testnet readiness review.
-- [ ] Publish testnet binaries and operating instructions.
-- [ ] Recruit independent node operators.
-- [ ] Monitor block production, hash rate, forks and network health.
+- [ ] Obtain explicit project-owner approval for a public testnet.
+- [ ] Only then publish testnet binaries and operating instructions.
+- [ ] Recruit independent node operators and monitor network health.
 
-**Exit criteria:** Public testnet operates with independent participants and documented limitations.
+**Exit criteria:** Public testnet operates with independent participants and documented limitations, if separately approved.
 
 ## M6 — Mainnet decision gate
 
 - [ ] Independent security audit/review.
-- [ ] Reproducible release process.
+- [ ] Reproducible release and signing process.
 - [ ] Independent infrastructure and seed operators.
 - [ ] Wallet/key-management and incident-response documentation.
+- [ ] Legal and operational review appropriate to intended distribution and use.
 - [ ] Explicit approval from the project owner.
 
-**No mainnet launch is authorised by this roadmap.**
+**No public testnet, mining deployment or mainnet launch is authorised by this roadmap.**
+
+
+## Latest source-audit milestone — 16 November 2026
+
+- [Draft PR #4: FREELY proof-of-work and difficulty audit](https://github.com/Schmacko/freely-bitcoin-core./pull/4) documents the pinned v32.1 PoW and retarget implementation, the 14-day target timespan implied by the agreed parameters, and the outstanding consensus decisions/test vectors.
+- The audit is documentation-only. It does not finalize `powLimit`, genesis `nBits`, minimum-difficulty policy, BIP94, or activate runtime chain code.
+- The complete task checklist is [v1.4](MASTER-PROJECT-COMPLETION-CHECKLIST.md); current checked-task count is 23/157 (14.6%).
+
+
+## Execution refresh — 18 November 2026
+
+- [Draft PR #8](https://github.com/Schmacko/freely-bitcoin-core./pull/8) now includes the canonical `ChainType::FREELY` selector, CLI chain label, fail-closed startup regression and focused workflow. This is still scaffolding, not a runnable FREELY node.
+- [Draft PR #10](https://github.com/Schmacko/freely-bitcoin-core./pull/10) now validates data-directory suffixes as a single safe portable path component and includes adversarial Windows/POSIX path fixtures. Latest focused workflow run #44210117086 is queued.
+- [Draft PR #2](https://github.com/Schmacko/freely-bitcoin-core./pull/2) now rejects malformed genesis header hex, invalid compact targets and targets above the supplied powLimit in its deterministic synthetic self-test. Latest focused workflow run #44210212065 is queued.
+- [Draft PR #6](https://github.com/Schmacko/freely-bitcoin-core./pull/6) includes the BIP94 period-start target and timestamp-boundary tests; current focused workflow remains pending.
+- [Draft PR #11](https://github.com/Schmacko/freely-bitcoin-core./pull/11) adds an upstream wallet compatibility suite, but the current focused workflow is queued and no FREELY-specific wallet is yet operational.
+- All 11 implementation PRs remain open and draft. No production parameters, public listeners, public network, mining deployment or launch have been activated.
