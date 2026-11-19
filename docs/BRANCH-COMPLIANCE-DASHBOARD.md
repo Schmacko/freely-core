@@ -387,3 +387,37 @@ PR-backed branch estimates: 75.8% across 12 PR branches (including the three clo
 4. Resolve PR #9 portability CI and re-run PR #4 after the shared Windows checkout correction is available.
 5. Begin the dedicated C++ FREELY parameter/genesis implementation behind the existing fail-closed startup gate; do not make the production chain selectable until derived genesis vectors and all exact-head tests are verified.
 6. Continue no-merge policy while any relevant workflow is pending, queued, cancelled, skipped or failed.
+
+
+## Latest engineering delta — 19 November 2026, 13:59 UTC
+
+This addendum supersedes the earlier 19 November snapshot above.
+
+### New exact-head implementation changes
+
+- **PR #8, head `3078f79d6452dfccc9a1f4baeb0c0f3f1f635358`:** added `src/test/freely_genesis_tests.cpp` and registered it in `src/test/CMakeLists.txt`. The C++ test constructs the approved version-1 coinbase, checks the 50 FLY OP_RETURN output is unspendable, and asserts candidate transaction ID/Merkle root `c28adb462751d49bfd4ab13451f8f2801634f28d333d1493e93b6077dd6cdfa1`. It does not set a nonce or activate the chain. Focused run [44537444112](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44537444112) and full CI [44537444113](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44537444113) are queued; the C++ vector is not yet verified.
+- **PR #11, head `65c5e697414b75943eea2d8cd76cb756bc8d9981`:** synchronized with PR #8 through merge commit `8791456a30a93004db334091d165a2838e407e94`, then corrected the wallet workflow to enable `BUILD_TESTS=ON` (so CMake generates `build/test/config.ini` and functional-runner links) while building only `bitcoind` and `bitcoin-cli`. It runs `build/test/functional/test_runner.py`. Focused [44537919886](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44537919886) and full CI [44537919781](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44537919781) are queued.
+- **PR #10, head `33a69483ac55f77714755435dcfc77233bb6f336`:** static collision checks now include default BIP325 signet magic `0a03cf40`; arbitrary custom signet challenges are explicitly left to runtime collision validation. Added the missing `test_check_production_readiness.py` file after discovering that the workflow's second unittest discovery command previously ran zero tests. Current inventory: 22 network-safety tests + 17 production-readiness tests = 39 methods. Focused [44538762299](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44538762299) is queued; full CI [44538762453](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44538762453) is pending.
+- **PR #12, head `c58b0b8772543b1dd417a04c5b703b7f78a095c7`:** approved baseline now documents the default signet collision value; focused [44538844927](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44538844927) and full CI [44538845317](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44538845317) are queued.
+
+### Current verified evidence
+
+- PR #1 exact-head focused C++ run [44310378703](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44310378703) passed: `test_bitcoin` compiled; `pow_tests` and `validation_tests` passed 2/2. Full CI [44310378640](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44310378640) remains queued.
+- PR #9 full CI [44357357887](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44357357887) remains pending with all 25 jobs queued. Earlier partial run was cancelled.
+- PR #4 trailing whitespace fixed in `08cfaff6d76ab301562badf2297756997f0ba420`; new runs [44536951045](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44536951045) and [44536938452](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44536938452) queued. Its previous run failed on Windows checkout; PR #9 holds the portability correction.
+- PR #5 runs [44313365353](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44313365353) and [44313351736](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44313351736) queued.
+- PR #6 focused [44360048684](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44360048684) and inherited runs [44360048592](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44360048592), [44360040395](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44360040395) queued.
+- No PR has merged. Current successful C++ evidence remains PR #1's focused two-suite run only. No current-head FREELY genesis, retarget, preflight or wallet functional pass is verified.
+
+### Current branch metrics
+
+Estimated weighted phase completion: **47.50%** using the established phase weights and current phase estimates (foundation 90%, consensus spec 90%, architecture 100%, core 35%, testing 30%, wallet/node 20%, mining 10%, security 35%, testnet 5%, production 0%). This is an estimate of work, not build/test/release readiness.
+
+- Open PR branch average: **71.1% across 9** open implementation PR branches.
+- All PR-backed branch average: **75.8% across 12** PR branches, including #2/#3/#7 closed unmerged.
+- All feature branch average: **71.9% across 13**, adding the superseded no-PR retarget-regression branch.
+- Prior baseline: 71.8%/11 PR-backed and 67.9%/12 all feature branches. Denominators each increased by one with PR #12; three earlier PR branches are now closed but remain in the historical PR-backed average.
+
+### Parameter approval and safety
+
+All four parameter proposal areas were explicitly approved on 18 November 2026. The exact PoW, network identity, genesis candidate and script activation values are in `docs/FREELY-APPROVED-PROTOCOL-PARAMETERS.md`. Genesis nonce, transaction/Merkle commitment and final block hash remain derived outputs; the C++ test is queued, not passed. Production chain selection remains fail-closed. No production genesis activation, public network exposure, DNS seeds, mining deployment, paid infrastructure or launch is authorized.
