@@ -322,3 +322,68 @@ Numeric production `powLimit`, initial difficulty, final network identity, final
 After verifying that PR #12 carries the exact PR #2 consensus-specification head and its complete specification/generator/workflow file set, PR #2 was closed unmerged to avoid duplicate review and CI. PR #12 is the sole consolidated review target for that work. PR #3 and #7 remain closed unmerged as previously recorded; PR #9 remains reopened for the independent CI portability fixes.
 
 **Corrected inventory:** 12 PRs created · 9 open · 3 closed unmerged · 0 merged. All 9 open PRs are drafts. No source implementation is discarded by this consolidation, and no production parameters are activated.
+
+
+---
+
+## Live engineering refresh — 19 November 2026
+
+**This section supersedes earlier PR counts, SHAs, approvals and CI statuses above.** Older sections remain historical context.
+
+### Coordination repository synchronization
+
+- Default branch `main`: `710c05b84f7551d00b1316eedb6d11ca077e7f1f`.
+- Design branch `m1-consensus-design`: `59b8028325148331d2ed3cb2d359fb82a8de4539`.
+- Created a non-fast-forward merge commit with parents `d074476549cfb92c998a51cdbbc8a8ce3c4fa916` and current main `710c05b84f7551d00b1316eedb6d11ca077e7f1f`.
+- The two main-branch commits changed only `docs/BRANCH-COMPLIANCE-DASHBOARD.md`; the design branch's three changed paths were `docs/M1-CONSENSUS-DESIGN.md`, `docs/M1-UPSTREAM-SOURCE-REVIEW.md`, and `scripts/check-subsidy-schedule.sh`. The path sets were disjoint and the dashboard file was preserved in the merged tree.
+- PR #2 remains open/draft. Compare now reports 7 commits ahead and 0 behind. GitHub's mergeable flag still reports false; no merge was attempted.
+
+### Implementation PR inventory
+
+**12 PRs created · 9 open · 3 closed unmerged · 0 merged.** All 9 open implementation PRs are drafts. PR #2, #3 and #7 were closed unmerged; their specification/audit content is consolidated in PR #12.
+
+| PR | Workstream | Current exact head | Current CI evidence |
+|---:|---|---|---|
+| [#1](https://github.com/Schmacko/freely-bitcoin-core./pull/1) | M1 monetary policy / production guards | `06d79002573506f9311abf35ae1d70c891f0a358` | Focused C++ run [44310378703](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44310378703) passed: test_bitcoin built; pow_tests and validation_tests 2/2 passed. Full CI [44310378640](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44310378640) queued. |
+| [#4](https://github.com/Schmacko/freely-bitcoin-core./pull/4) | PoW/difficulty source audit | `08cfaff6d76ab301562badf2297756997f0ba420` | Previous run [43983947425](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/43983947425) failed on Windows checkout and trailing whitespace; whitespace fixed, checkout fix is in PR #9. No new exact-head run observed yet. |
+| [#5](https://github.com/Schmacko/freely-bitcoin-core./pull/5) | Retarget policy | `96288f5487025c0b2f71783a09c4c9021cf06b78` | CI [44313365353](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44313365353) queued. |
+| [#6](https://github.com/Schmacko/freely-bitcoin-core./pull/6) | Retarget/BIP94 C++ and functional tests | `76da2362b7c231669ba0b8cd4b658d558dbcf94a` | Focused [44360048684](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44360048684) and full CI [44360048592](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44360048592) queued. |
+| [#8](https://github.com/Schmacko/freely-bitcoin-core./pull/8) | FREELY chain selector/base parameters and fail-closed startup | `77582a206d70f4d8af88d2f4fea3273cfd985d41` | Focused [44366915126](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44366915126) pending; full CI [44366915015](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44366915015) queued. |
+| [#9](https://github.com/Schmacko/freely-bitcoin-core./pull/9) | Windows-safe CI portability | `66a92038f42385f12b16ec1295d77507a5c25d88` | New inherited CI [44357357887](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44357357887) pending. Earlier partial run was cancelled; not a full pass. |
+| [#10](https://github.com/Schmacko/freely-bitcoin-core./pull/10) | Network safety and production-readiness preflight | `594b0f3afb28636a0855dff44dc63926175b3243` | Focused [44536476372](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44536476372) and full CI [44536476397](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44536476397) queued. |
+| [#11](https://github.com/Schmacko/freely-bitcoin-core./pull/11) | Wallet/node readiness | `0b7e053a0e108b56ee361114b2c052081654ccba` | Fixed CMake functional-runner path after exact-head failure. Focused [44535690321](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44535690321) and full CI [44535690335](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44535690335) queued. |
+| [#12](https://github.com/Schmacko/freely-bitcoin-core./pull/12) | Consolidated consensus/network docs and genesis candidate generator | `dbb6c6a549637616b5ccbfc6e57d367b9979d2ec` | Focused [44536381067](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44536381067) and full CI [44536381169](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44536381169) queued. |
+
+### Owner-approved protocol parameters — 18 November 2026
+
+All four proposal areas were explicitly approved. The authoritative implementation baseline is `docs/FREELY-APPROVED-PROTOCOL-PARAMETERS.md` in PR #10 and now also PR #12.
+
+- PoW: SHA-256d; `powLimit=00000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff`; genesis `nBits=0x1d00ffff` (decoded target is slightly harder than powLimit); 600-second spacing; 2,016-block interval; 14-day timespan; 1/4–4x clamp; minimum difficulty and no-retargeting disabled; BIP94 enabled from genesis.
+- Network identity: magic `fa c3 b7 d1`; P2P/RPC 49444/49445; data/config suffix `freely`; Base58 55/117/183; extended keys `04464c59/04666c79`; Bech32 HRP `fly`.
+- Genesis candidate: version 1; timestamp 1,794,960,000; message `FREELY FLY genesis 2026-11-18`; 50 FLY permanently unspendable OP_RETURN output. Nonce, transaction ID, Merkle root and final block hash remain derived and must be independently verified.
+- Initial script matrix: BIP34/BIP65/BIP66/CSV/SegWit at height 1; Taproot/witness-v1 via the v32.1 script-flag architecture; TESTDUMMY NEVER_ACTIVE.
+
+Approval authorizes implementation and verification only. It does not authorize production genesis activation, public network exposure, DNS seeds, mining deployment, public testnet/mainnet, paid infrastructure or launch. FREELY startup remains fail-closed.
+
+### Current verified engineering evidence
+
+- Exact-head PR #1 focused C++ compilation succeeded and `pow_tests` plus `validation_tests` passed 2/2.
+- PR #11 wallet-enabled build succeeded on the earlier merge ref, but its functional runner failed before tests because it read the source-tree config path. The workflow now invokes the CMake build-tree runner; the fix is queued, not yet verified.
+- PR #10 manifest and validator record the approved values but keep genesis hash/nonce unset. The preflight must remain blocked until the derived genesis commitment and release evidence exist.
+- PR #12 now removes the conflicting unapproved proposal values, establishes one canonical approved document, reconciles the decision register/specification/architecture, and aligns the genesis candidate generator with the approved message/time/script/PoW values. Its focused test run is queued.
+- No full CI matrix is currently verified successful; no PR is merged.
+
+### Metrics discipline
+
+Estimated weighted phase completion is a separate project estimate, not a CI/build/merge score. Current estimated phase values: foundation 90%, consensus specification 85%, network architecture 100%, core implementation 35%, testing 28%, wallet/node 15%, mining 10%, security 30%, testnet 5%, production readiness 0%. With the established weights this is 45.45%.
+
+PR-backed branch estimates: 75.8% across 12 PR branches (including the three closed unmerged branches); all feature branches: 71.9% across 13 branches (adds the superseded no-PR retarget-regression branch). Open PR branch average alone is 71.1% across 9 branches. Compared with the prior 71.8%/11 PR-backed and 67.9%/12 all-branch snapshot, denominators increased by one because PR #12 was added; PR #2/#3/#7 closure changes status, not the historical branch count.
+
+### Immediate next actions
+
+1. Inspect exact-head PR #10 and #12 focused workflows and correct any deterministic test defects.
+2. Inspect PR #11 rerun and confirm the CMake build-tree runner finds `build/test/config.ini` and starts the wallet functional test.
+3. Reconcile PR #8 and PR #11 dependency heads before integration; PR #11 currently bases on PR #8's exact current head.
+4. Resolve PR #9 portability CI and re-run PR #4 after the shared Windows checkout correction is available.
+5. Begin the dedicated C++ FREELY parameter/genesis implementation behind the existing fail-closed startup gate; do not make the production chain selectable until derived genesis vectors and all exact-head tests are verified.
+6. Continue no-merge policy while any relevant workflow is pending, queued, cancelled, skipped or failed.
