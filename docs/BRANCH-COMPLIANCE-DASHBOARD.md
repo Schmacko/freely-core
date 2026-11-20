@@ -442,7 +442,7 @@ All 13 open PRs are drafts. No open PR has submitted reviews or inline review th
 
 | Repository / PR | Branch | Exact head | Estimated branch work | Exact-head workflow evidence |
 |---|---|---|---:|---|
-| freely-core #2 | `m1-consensus-design` | `8d638c46d880c7090c60e391e4f545b5d09df4a7` | 85% | No Actions run returned |
+| freely-core #2 | `m1-consensus-design` | `4f287c9ff3a72bde4f654cad3911428d67bcc667` | 85% | No Actions run returned |
 | bitcoin-core #1 | `freely/m1-consensus` | `06d79002573506f9311abf35ae1d70c891f0a358` | 90% | Focused C++ run 44310378703 passed; full CI 44310378640 has 28/29 jobs successful and one Windows job queued |
 | bitcoin-core #4 | `freely/pow-difficulty-audit` | `08cfaff6d76ab301562badf2297756997f0ba420` | 90% | Push 44536938452 and PR CI 44536951045 queued |
 | bitcoin-core #5 | `freely/retarget-policy` | `96288f5487025c0b2f71783a09c4c9021cf06b78` | 95% | Push 44313351736 and PR CI 44313365353 queued |
@@ -486,7 +486,7 @@ The inventory contains 24 retained feature branches: 13 open-PR branches and 11 
 - PR #20 is 45 commits ahead of PR #17 and 0 behind.
 - PR #21 is 87 commits ahead of the current PR #20 base and 0 behind.
 - PR #11 had diverged from the current PR #8 base by four commits. This run created merge commit `77c55275bb716a72452f52741ff905f87fee1a48` with the PR #11 head as first parent and PR #8's current head `003d36400c74bc58a06ae9aa12d966e1c0ef69f2` as second parent. The two base-side changed files were disjoint from PR #11's two added files. Current comparison: 14 ahead, 0 behind; the PR's two-file diff is preserved.
-- PR #2 in the coordination repository is 9 commits ahead of `main`, 0 behind.
+- PR #2 in the coordination repository is 11 commits ahead of `main`, 0 behind.
 - No unresolved review threads or submitted reviews were found on any of the 13 open PRs.
 
 ### Verified changes in this run
@@ -542,3 +542,8 @@ The previous conversation reported a rough 48.0% overall estimate without a phas
 - PR #20's new independent coinbase/Merkle test has only an isolated local Python 1/1 reproduction so far; do not treat it as the full repository test suite or C++ verification.
 - PR #21's previous exact-head runs `44752779624` and `44752791923` were cancelled after the merge synchronization. The new exact-head runs above are not passes until completed successfully.
 - Branch averages now use 86.1% across 13 open-PR branches and 91.4% across all 24 retained feature branches. Weighted project estimate is 65.7% after raising testing work estimate to 46%; verification/merge/production status is unchanged.
+
+
+### Coordination-branch self-update
+
+The dashboard is maintained on the `m1-consensus-design` branch itself. After the latest dashboard commit, the current PR #2 head is `4f287c9ff3a72bde4f654cad3911428d67bcc667`, 11 commits ahead of `main` and 0 behind. The open-PR inventory above reflects this exact head; no Actions run is returned for this documentation-only update.
