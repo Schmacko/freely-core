@@ -453,8 +453,8 @@ All 13 open PRs are drafts. No open PR has submitted reviews or inline review th
 | bitcoin-core #12 | `freely/reconciled-docs` | `0eef50da8c8897430841ceee62f57d8ab56ee9a3` | 95% | Focused 44551190526 and PR CI 44551190648 queued; push CI 44551866472 and 44551173884 queued |
 | bitcoin-core #17 | `freely/genesis-and-network-code` | `b14ea45a6227b0f90f45c1eb6a1c2b12c3ed8c18` | 85% | Focused 44617567251 and PR CI 44617567271 pending |
 | bitcoin-core #18 | `freely/genesis-miner-implementation` | `561d0947b0b7bc23491aeff9dfa0bb4f8ef64c0c` | 95% | Genesis search 44642789182 and PR CI 44642798126 queued |
-| bitcoin-core #20 | `freely/chainparams-candidate-integration` | `20100eee92d3a319360e11265abf0d9069ccbb09` | 85% | Focused 44750470167 and PR CI 44750481540 queued |
-| bitcoin-core #21 | `freely/private-node-startup` | `e2abcb44ca44b47fabcad7e6b76a8f98a09f7fe5` | 85% | Focused 44752779624 (1 job) and PR CI 44752791923 (25 jobs) queued |
+| bitcoin-core #20 | `freely/chainparams-candidate-integration` | `0a41849496a7499d2650a18c01675b4dd92e04c2` | 87% | Focused 44754105862 and PR CI 44754120057 queued |
+| bitcoin-core #21 | `freely/private-node-startup` | `7eb692a647b76314cc28b1e219e2e18027b2813f` | 87% | Focused 44754182149 (1 job) and PR CI 44754193506 (25 jobs) queued |
 
 ### Retained feature branches without an open PR
 
@@ -474,8 +474,8 @@ All 13 open PRs are drafts. No open PR has submitted reviews or inline review th
 
 The inventory contains 24 retained feature branches: 13 open-PR branches and 11 retained branches without an open PR. The default branches and the upstream baseline branch are excluded from branch averages.
 
-- Open-PR branch average: **85.8% (13 branches)**.
-- All retained feature-branch average: **91.3% (24 branches)**.
+- Open-PR branch average: **86.1% (13 branches)**.
+- All retained feature-branch average: **91.4% (24 branches)**.
 - These are estimates of branch task completion, not merge, CI, build or production-readiness scores. Closed/unmerged branches remain in the all-feature average because their work still exists in the repository history; closure does not mean their code was integrated.
 
 ### Current dependency graph and synchronization
@@ -483,8 +483,8 @@ The inventory contains 24 retained feature branches: 13 open-PR branches and 11 
 - PR #1 is 24 commits ahead of the pinned upstream branch and 0 behind.
 - PR #8 is 20 commits ahead of PR #1's branch and 0 behind.
 - PR #17 is 6 commits ahead of PR #8 and 0 behind.
-- PR #20 is 42 commits ahead of PR #17 and 0 behind.
-- PR #21 is 86 commits ahead of the current PR #20 base and 0 behind.
+- PR #20 is 45 commits ahead of PR #17 and 0 behind.
+- PR #21 is 87 commits ahead of the current PR #20 base and 0 behind.
 - PR #11 had diverged from the current PR #8 base by four commits. This run created merge commit `77c55275bb716a72452f52741ff905f87fee1a48` with the PR #11 head as first parent and PR #8's current head `003d36400c74bc58a06ae9aa12d966e1c0ef69f2` as second parent. The two base-side changed files were disjoint from PR #11's two added files. Current comparison: 14 ahead, 0 behind; the PR's two-file diff is preserved.
 - PR #2 in the coordination repository is 9 commits ahead of `main`, 0 behind.
 - No unresolved review threads or submitted reviews were found on any of the 13 open PRs.
@@ -492,6 +492,8 @@ The inventory contains 24 retained feature branches: 13 open-PR branches and 11 
 ### Verified changes in this run
 
 1. PR #21: fixed `test/functional/feature_freely_startup.py`. Its initial offline test node previously omitted `-discover=0`, `-dnsseed=0` and `-listenonion=0`, which the new fail-closed validator requires. Added these and explicit `-upnp=0`, `-natpmp=0`. Commit: `e2abcb44ca44b47fabcad7e6b76a8f98a09f7fe5`.
+2. PR #20: added an independent Python serializer regression for the approved 117-byte genesis coinbase, checking the transaction ID and single-transaction Merkle root. The equivalent isolated local Python unittest passed 1/1; the full repository test command on the new head remains pending. Final branch head: `0a41849496a7499d2650a18c01675b4dd92e04c2`.
+3. PR #21: synchronized the private-node branch with PR #20's three new commits using merge commit `7eb692a647b76314cc28b1e219e2e18027b2813f` (PR #21 first parent; PR #20 head `0a41849496a7499d2650a18c01675b4dd92e04c2` second parent). Comparison: 87 ahead, 0 behind. The new Python coinbase/Merkle regression is now inherited by PR #21.
 2. PR #11: synchronized the wallet/node readiness branch with the current core-chain base using the two-parent merge commit above. The upstream/base changes were preserved without altering the wallet readiness workflow or its document.
 3. Updated PR #11 and #21 descriptions with exact heads, merge/synchronization details and pending workflow evidence.
 4. This dashboard is being updated with the current branch, PR, dependency and CI inventory.
@@ -500,7 +502,7 @@ The inventory contains 24 retained feature branches: 13 open-PR branches and 11 
 
 - The only successful exact-head FREELY-focused C++ evidence remains PR #1 run [44310378703](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44310378703): `test_bitcoin` compiled and `pow_tests` plus `validation_tests` passed 2/2.
 - PR #1 full CI [44310378640](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44310378640) has 28/29 jobs completed successfully; the Windows msvcrt cross-built job remains queued. The full matrix is not complete.
-- All other current-head focused and full CI runs listed above are queued or pending. Earlier PR #21 run [44750827494](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44750827494) was cancelled after its head was superseded; it is not a pass.
+- Current exact-head PR #20 focused workflow [44754105862](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44754105862) and full CI [44754120057](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44754120057) are queued. PR #21 focused workflow [44754182149](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44754182149) and full CI [44754193506](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44754193506) are queued. PR #11's current exact-head wallet workflow [44753559587](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44753559587) and full CI [44753559664](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44753559664) are queued. Previous PR #20/#21 head runs were cancelled after their branches advanced; none is a pass.
 - No Bitcoin Core fork PR has merged. Only the initial documentation foundation PR in the coordination repository is merged.
 - No PR was merged in this run. Production genesis activation, public network exposure, DNS seeds, mining deployment, paid infrastructure and public launch remain unauthorized.
 
@@ -514,15 +516,15 @@ Using the established phase weights (foundation 5%, consensus specification 15%,
 | Consensus specification | 15% | 90% |
 | Network architecture | 10% | 85% |
 | Core implementation | 25% | 65% |
-| Testing | 15% | 45% |
+| Testing | 15% | 46% |
 | Wallet/node readiness | 10% | 40% |
 | Mining | 5% | 90% |
 | Security | 10% | 65% |
 | Testnet | 5% | 10% |
 | Production readiness | 5% | 0% |
-| **Weighted overall estimate** | **100%** | **65.5%** |
+| **Weighted overall estimate** | **100%** | **65.7%** |
 
-The previous conversation reported a rough 48.0% overall estimate without a phase breakdown. The current 65.5% is the first refreshed estimate using the explicit phase weights in this dashboard, so the 17.5-point difference is not a clean like-for-like productivity delta. Work-completion estimates remain separate from verified builds, test passes, merges and production readiness.
+The previous conversation reported a rough 48.0% overall estimate without a phase breakdown. The current 65.7% is the refreshed estimate using the explicit phase weights in this dashboard, so the 17.7-point difference is not a clean like-for-like productivity delta. Work-completion estimates remain separate from verified builds, test passes, merges and production readiness.
 
 ### Next engineering actions
 
@@ -531,3 +533,12 @@ The previous conversation reported a rough 48.0% overall estimate without a phas
 3. Complete exact-head CI on PR #8 before considering its dependants; reconcile PR #11, #17, #20 and #21 in dependency order.
 4. Re-run and verify the genesis nonce-search helper tests and C++ genesis/PoW vectors.
 5. Keep production chain selection fail-closed until all consensus, genesis and network identity evidence is independently reproduced and release authorization is explicitly granted.
+
+
+## Latest branch/CI delta — 20 November 2026
+
+- PR #20 current head `0a41849496a7499d2650a18c01675b4dd92e04c2`; current push test run `44754105862` and pull-request CI `44754120057` are queued.
+- PR #21 current head `7eb692a647b76314cc28b1e219e2e18027b2813f`; current push test run `44754182149` and pull-request CI `44754193506` are queued.
+- PR #20's new independent coinbase/Merkle test has only an isolated local Python 1/1 reproduction so far; do not treat it as the full repository test suite or C++ verification.
+- PR #21's previous exact-head runs `44752779624` and `44752791923` were cancelled after the merge synchronization. The new exact-head runs above are not passes until completed successfully.
+- Branch averages now use 86.1% across 13 open-PR branches and 91.4% across all 24 retained feature branches. Weighted project estimate is 65.7% after raising testing work estimate to 46%; verification/merge/production status is unchanged.
