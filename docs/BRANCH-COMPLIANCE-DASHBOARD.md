@@ -421,3 +421,113 @@ Estimated weighted phase completion: **47.50%** using the established phase weig
 ### Parameter approval and safety
 
 All four parameter proposal areas were explicitly approved on 18 November 2026. The exact PoW, network identity, genesis candidate and script activation values are in `docs/FREELY-APPROVED-PROTOCOL-PARAMETERS.md`. Genesis nonce, transaction/Merkle commitment and final block hash remain derived outputs; the C++ test is queued, not passed. Production chain selection remains fail-closed. No production genesis activation, public network exposure, DNS seeds, mining deployment, paid infrastructure or launch is authorized.
+
+
+---
+
+## Live engineering refresh — 20 November 2026
+
+This section supersedes earlier status, branch-head and CI snapshots above. Historical sections are retained as an audit trail.
+
+### Repository identity and default branches
+
+- Coordination repository: `Schmacko/freely-core`, default branch `main`, exact head `710c05b84f7551d00b1316eedb6d11ca077e7f1f`.
+- Bitcoin Core fork repository is actually named `Schmacko/freely-bitcoin-core.` (including the trailing period), default branch `master`, exact head `498b598cf27317b7306a859ce82b0571a0f9e348`. The similarly named repository without the trailing period returns 404; do not target it.
+- Pinned upstream baseline branch: `freely/upstream-v32.1` at `f0de87f040621468b956f01f526a43a010310501`.
+- No workflow runs are associated with either default-branch head in the current query. PR/push workflows below are the relevant evidence.
+
+### Current open PR inventory
+
+All 13 open PRs are drafts. No open PR has submitted reviews or inline review threads. GitHub currently reports the open PRs as mergeable; that does not satisfy the merge gate while required CI is queued/pending.
+
+| Repository / PR | Branch | Exact head | Estimated branch work | Exact-head workflow evidence |
+|---|---|---|---:|---|
+| freely-core #2 | `m1-consensus-design` | `8d638c46d880c7090c60e391e4f545b5d09df4a7` | 85% | No Actions run returned |
+| bitcoin-core #1 | `freely/m1-consensus` | `06d79002573506f9311abf35ae1d70c891f0a358` | 90% | Focused C++ run 44310378703 passed; full CI 44310378640 has 28/29 jobs successful and one Windows job queued |
+| bitcoin-core #4 | `freely/pow-difficulty-audit` | `08cfaff6d76ab301562badf2297756997f0ba420` | 90% | Push 44536938452 and PR CI 44536951045 queued |
+| bitcoin-core #5 | `freely/retarget-policy` | `96288f5487025c0b2f71783a09c4c9021cf06b78` | 95% | Push 44313351736 and PR CI 44313365353 queued |
+| bitcoin-core #6 | `freely/retarget-test-vectors` | `04554fd475b0d9a6300b6f4673870e881af26484` | 90% | Push 44615892846, focused PR 44615900434 and PR CI 44615900431 queued |
+| bitcoin-core #8 | `freely/core-chain-implementation` | `003d36400c74bc58a06ae9aa12d966e1c0ef69f2` | 75% | Focused 44617396994 and PR CI 44617397075 queued |
+| bitcoin-core #10 | `freely/network-safety-preflight` | `4c2c3588f2a1d40ae76976d518fa35f228f2933c` | 75% | Focused 44551102470 and PR CI 44551102352 queued |
+| bitcoin-core #11 | `freely/wallet-node-readiness` | `77c55275bb716a72452f52741ff905f87fee1a48` | 70% | Current exact-head wallet workflow 44753559587 and PR CI 44753559664 queued |
+| bitcoin-core #12 | `freely/reconciled-docs` | `0eef50da8c8897430841ceee62f57d8ab56ee9a3` | 95% | Focused 44551190526 and PR CI 44551190648 queued; push CI 44551866472 and 44551173884 queued |
+| bitcoin-core #17 | `freely/genesis-and-network-code` | `b14ea45a6227b0f90f45c1eb6a1c2b12c3ed8c18` | 85% | Focused 44617567251 and PR CI 44617567271 pending |
+| bitcoin-core #18 | `freely/genesis-miner-implementation` | `561d0947b0b7bc23491aeff9dfa0bb4f8ef64c0c` | 95% | Genesis search 44642789182 and PR CI 44642798126 queued |
+| bitcoin-core #20 | `freely/chainparams-candidate-integration` | `20100eee92d3a319360e11265abf0d9069ccbb09` | 85% | Focused 44750470167 and PR CI 44750481540 queued |
+| bitcoin-core #21 | `freely/private-node-startup` | `e2abcb44ca44b47fabcad7e6b76a8f98a09f7fe5` | 85% | Focused 44752779624 (1 job) and PR CI 44752791923 (25 jobs) queued |
+
+### Retained feature branches without an open PR
+
+| Branch | Exact head | Estimated branch work | State |
+|---|---|---:|---|
+| freely-core `docs/freely-foundation` | `f07aab1643fef08cb918b3bf2cdaf447213f68a2` | 100% | PR #1 merged |
+| `freely/chain-selection-audit` | `d4b6ad2d171764fffc25e5034e0fc7a4ec69fcc5` | 100% | PR #3 closed unmerged |
+| `freely/ci-windows-safe` | `66a92038f42385f12b16ec1295d77507a5c25d88` | 100% | PR #9 closed unmerged |
+| `freely/consensus-specification` | `1c839b9b8773492850a0bd82496b99b7eeb911ed` | 100% | PR #2 closed unmerged; content consolidated elsewhere |
+| `freely/genesis-nonce-search` | `a4015b90c27e2dad02177d792f5ce64f12591ab6` | 100% | PR #14 closed unmerged |
+| `freely/genesis-nonce-tool-integration` | `9149a0f153c23740cebf9b7fd4d4577679c850ee` | 100% | PR #16 closed unmerged |
+| `freely/network-architecture` | `7157d5ce96549dc9f937fe0896e4b59e44551d70` | 100% | PR #7 closed unmerged |
+| `freely/network-magic-integration-v2` | `74655cbc36450e7d8f0fe2bf3fc036e1955c879e` | 100% | PR #15 closed unmerged |
+| `freely/network-magic-registration` | `8adf6cd05d819c3ae2f97ea48b1aca5f1d41119f` | 100% | PR #13 closed unmerged |
+| `freely/production-pow-regression-vectors` | `2026956da81c6e0c49c6e2e0d28de921762dfdfe` | 100% | PR #19 closed unmerged |
+| `freely/retarget-regression-expansion` | `3c64e8e54ef1c42c37ea416cd4b107e947fcb7ed` | 75% | Retained branch; no PR |
+
+The inventory contains 24 retained feature branches: 13 open-PR branches and 11 retained branches without an open PR. The default branches and the upstream baseline branch are excluded from branch averages.
+
+- Open-PR branch average: **85.8% (13 branches)**.
+- All retained feature-branch average: **91.3% (24 branches)**.
+- These are estimates of branch task completion, not merge, CI, build or production-readiness scores. Closed/unmerged branches remain in the all-feature average because their work still exists in the repository history; closure does not mean their code was integrated.
+
+### Current dependency graph and synchronization
+
+- PR #1 is 24 commits ahead of the pinned upstream branch and 0 behind.
+- PR #8 is 20 commits ahead of PR #1's branch and 0 behind.
+- PR #17 is 6 commits ahead of PR #8 and 0 behind.
+- PR #20 is 42 commits ahead of PR #17 and 0 behind.
+- PR #21 is 86 commits ahead of the current PR #20 base and 0 behind.
+- PR #11 had diverged from the current PR #8 base by four commits. This run created merge commit `77c55275bb716a72452f52741ff905f87fee1a48` with the PR #11 head as first parent and PR #8's current head `003d36400c74bc58a06ae9aa12d966e1c0ef69f2` as second parent. The two base-side changed files were disjoint from PR #11's two added files. Current comparison: 14 ahead, 0 behind; the PR's two-file diff is preserved.
+- PR #2 in the coordination repository is 9 commits ahead of `main`, 0 behind.
+- No unresolved review threads or submitted reviews were found on any of the 13 open PRs.
+
+### Verified changes in this run
+
+1. PR #21: fixed `test/functional/feature_freely_startup.py`. Its initial offline test node previously omitted `-discover=0`, `-dnsseed=0` and `-listenonion=0`, which the new fail-closed validator requires. Added these and explicit `-upnp=0`, `-natpmp=0`. Commit: `e2abcb44ca44b47fabcad7e6b76a8f98a09f7fe5`.
+2. PR #11: synchronized the wallet/node readiness branch with the current core-chain base using the two-parent merge commit above. The upstream/base changes were preserved without altering the wallet readiness workflow or its document.
+3. Updated PR #11 and #21 descriptions with exact heads, merge/synchronization details and pending workflow evidence.
+4. This dashboard is being updated with the current branch, PR, dependency and CI inventory.
+
+### CI evidence and merge gate
+
+- The only successful exact-head FREELY-focused C++ evidence remains PR #1 run [44310378703](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44310378703): `test_bitcoin` compiled and `pow_tests` plus `validation_tests` passed 2/2.
+- PR #1 full CI [44310378640](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44310378640) has 28/29 jobs completed successfully; the Windows msvcrt cross-built job remains queued. The full matrix is not complete.
+- All other current-head focused and full CI runs listed above are queued or pending. Earlier PR #21 run [44750827494](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44750827494) was cancelled after its head was superseded; it is not a pass.
+- No Bitcoin Core fork PR has merged. Only the initial documentation foundation PR in the coordination repository is merged.
+- No PR was merged in this run. Production genesis activation, public network exposure, DNS seeds, mining deployment, paid infrastructure and public launch remain unauthorized.
+
+### Weighted project estimate
+
+Using the established phase weights (foundation 5%, consensus specification 15%, network architecture 10%, core implementation 25%, testing 15%, wallet/node 10%, mining 5%, security 10%, testnet 5%, production readiness 5%):
+
+| Phase | Weight | Estimated work completion |
+|---|---:|---:|
+| Foundation | 5% | 100% |
+| Consensus specification | 15% | 90% |
+| Network architecture | 10% | 85% |
+| Core implementation | 25% | 65% |
+| Testing | 15% | 45% |
+| Wallet/node readiness | 10% | 40% |
+| Mining | 5% | 90% |
+| Security | 10% | 65% |
+| Testnet | 5% | 10% |
+| Production readiness | 5% | 0% |
+| **Weighted overall estimate** | **100%** | **65.5%** |
+
+The previous conversation reported a rough 48.0% overall estimate without a phase breakdown. The current 65.5% is the first refreshed estimate using the explicit phase weights in this dashboard, so the 17.5-point difference is not a clean like-for-like productivity delta. Work-completion estimates remain separate from verified builds, test passes, merges and production readiness.
+
+### Next engineering actions
+
+1. Wait for and inspect the exact-head PR #11 and #21 focused workflows; fix any deterministic failures.
+2. Inspect PR #20's candidate parameter workflow and PR #17's genesis/network tests once jobs leave queued/pending.
+3. Complete exact-head CI on PR #8 before considering its dependants; reconcile PR #11, #17, #20 and #21 in dependency order.
+4. Re-run and verify the genesis nonce-search helper tests and C++ genesis/PoW vectors.
+5. Keep production chain selection fail-closed until all consensus, genesis and network identity evidence is independently reproduced and release authorization is explicitly granted.
