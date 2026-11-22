@@ -15,7 +15,7 @@ All active PRs are open and GitHub currently reports them mergeable. Inline revi
 
 | PR | Branch | Exact head | Base comparison | Estimate |
 |---|---|---|---|---:|
-| freely-core #2 | `m1-consensus-design` | `62265735836a0c64c49ff656aee4c05a3e3eaff4` | 16 ahead, 0 behind `main` | 85% |
+| freely-core #2 | `m1-consensus-design` | `0d0bfa64b9337fb676bfbbe37e5ec7cd33ef764f` | 18 ahead, 0 behind `main` | 85% |
 | Bitcoin #4 | `freely/pow-difficulty-audit` | `92d0c7957fd054c74a195de2ba8133cabd696a18` | 4 ahead, 0 behind | 90% |
 | Bitcoin #5 | `freely/retarget-policy` | `3d5006d411ed2781985d00506c3e1a3c36675962` | 5 ahead, 0 behind | 95% |
 | Bitcoin #6 | `freely/retarget-test-vectors` | `5cbca965a9340f85631804a5fa5c827a3b79b015` | 4 ahead, 25 behind; GitHub reports mergeable | 90% |
@@ -25,7 +25,7 @@ All active PRs are open and GitHub currently reports them mergeable. Inline revi
 | Bitcoin #12 | `freely/reconciled-docs` | `63d698df065f8729435dc4aca455bef18f53e41f` | 65 ahead, 0 behind | 95% |
 | Bitcoin #17 | `freely/genesis-and-network-code` | `8a567e0f11a3405d62f52b4b3a7c89869f1d5ec3` | 1 ahead, 0 behind PR #8 | 85% |
 | Bitcoin #18 | `freely/genesis-miner-implementation` | `3dc55cb2582a130306867679fad1c2b712ad1184` | 1 ahead, 0 behind PR #17 | 95% |
-| Bitcoin #21 | `freely/private-node-startup` | `2e874a467553783d12cd0f3815b4bc0b86c7cab5` | 2 ahead, 0 behind closed PR #20 base | 89% |
+| Bitcoin #21 | `freely/private-node-startup` | `2e874a467553783d12cd0f3815b4bc0b86c7cab5` | 3 ahead, 0 behind closed PR #20 base | 89% |
 | Bitcoin #22 | `freely/chainparams-reconciled-20261122` | `fd3f66ebe2f482954d836ad87ea7c110bed5fed9` | 5 ahead, 0 behind PR #17 | 90% |
 | Bitcoin #23 | `freely/ci-cmake-4-5-compat` | `24fbc47abe537064c88078d1a9a952f8a5fdde0b` | 2 ahead, 0 behind upstream baseline | 90% |
 
@@ -39,7 +39,7 @@ The Bitcoin repository currently has 38 `freely/` branches; the core repository 
 | #4 | Full CI [44910339764](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44910339764) | Failed; Windows and macOS native configure reported CMake 4.5 `non-target-directive` errors; ancestor replay also failed |
 | #5 | Full CI [44910342400](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44910342400) | Failed on the same CMake 4.5 configure issue |
 | #6 | Prior-head M1 [45027222292](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45027222292) and retarget [45027222414](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45027222414) passed on `c639e73e911f942a2415f32c6a93ceab82e04591`. New-head retarget [45034083151](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45034083151) pending, M1 [45034083189](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45034083189) queued, full CI [45034083216](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45034083216) queued | New head `5cbca965a9340f85631804a5fa5c827a3b79b015` has not passed CI yet; earlier focused results do not validate it |
-| #8 | M1 [45028307688](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45028307688) | Focused validation build and validation suite passed. Full CI [45028307701](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45028307701) queued |
+| #8 | M1 [45028307688](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45028307688) | Focused validation build and validation suite passed. Full CI [45028307701](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45028307701) has started; several matrix jobs are in progress and others remain queued |
 | #10 | Safety preflight [44955623705](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44955623705) | Focused Python preflight, production-evidence ledger and network identity checks passed. Full CI [44955623715](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44955623715) in progress; ancestor-commit job still active and one MSan/fuzz job was cancelled |
 | #11 | Wallet/node [45028317103](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45028317103); full CI [45028317116](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45028317116) | Both queued |
 | #12 | Full CI [45027152480](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45027152480); M1 [45027152493](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45027152493) | Both queued |
