@@ -88,3 +88,11 @@ The approved candidate parameter set may be implemented and independently verifi
 5. Resolve stale ancestry for PR #6 and rerun exact-head checks after synchronization.
 6. Continue investigating the Xcode 16.2/Clang 16.2 macOS native build issue without weakening consensus or general compiler-warning policy.
 
+
+
+## Addendum — 23 November 2026, 14:30 UTC
+
+- PR #18 advanced from the previously recorded head `28b76007ae757281c737e7318b5b3b33aeb1e754` to `27dad83b05e24d2172d4be183f14542a4d45d888` after correcting two multi-character newline literals in the diagnostic code. Focused workflow `45194441784` now passes all steps, including miner build, SHA-256d serialization self-test, argument rejection and approved genesis header verification. Full CI `45194442046` remains queued.
+- PR #21 remains at `b03aaf3419060c4942273519499a589294513cc9`. Its wallet-enabled build, candidate-parameter build and network-isolation build are still in progress; no new functional-test pass is claimed yet.
+- PR #23 remains at `c42df184aa1d65c9e7c1fa80d6a6cd1553b0d027`. The latest CI run `45193126171` has started Windows jobs; one Windows native fuzz job has completed CMake generation successfully, while the remaining build/test matrix is still pending or in progress.
+- These updates do not change the weighted 68.60% estimate or production-readiness status. No merge, activation or deployment occurred.
