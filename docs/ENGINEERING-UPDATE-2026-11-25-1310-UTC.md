@@ -93,3 +93,17 @@ The estimate increased from the 67.35% baseline by one percentage point because 
 - Reconcile PR #6's 25-commit divergence and overlapping CI changes before any merge.
 - Re-run PR #8's ancestor job with the corrected CI workflow; then proceed in dependency order through PR #17, PR #22 and PR #24 only after exact-head full CI and review gates are satisfied.
 - Continue to treat all queued, pending, skipped, cancelled or infrastructure-failed jobs as non-passes.
+
+
+## Security review addendum — 25 November 2026
+
+A deeper review of PR #24's network-isolation guards found a default-value mismatch: Bitcoin Core v32.1 defines `DEFAULT_NATPMP = true` in `src/mapport.h`, while the FREELY startup guard queried `-natpmp` with a false fallback. The loopback-private mode could therefore miss the default-on PCP/NAT-PMP port-mapping setting when the operator omitted the option. The offline mode is now equally explicit and requires `-natpmp=0` rather than relying on later argument interactions.
+
+- Corrected both startup guards on PR #24 branch `freely/private-node-integration-20261124` using `DEFAULT_NATPMP` directly and including `mapport.h`.
+- Source commit: `ebc45da690c463f1b1253eba055782d23ffbc334`.
+- Added a unit regression test proving both offline and loopback-private startup reject the default-on setting; updated the other FREELY unit-test fixtures to explicitly disable NAT-PMP so they continue to exercise their intended guard conditions.
+- Test commit and new PR #24 exact head: `c7c2196c2924a7f074d81bcbf22b08bad99a3bfd`.
+- New exact-head focused security workflow `45623537420` and offline-wallet workflow `45623537473` are in progress; full CI `45623537314` is pending. No compile/test pass is claimed for this new head.
+- PR #21's older branch still contains the pre-fix fallback and is explicitly marked superseded; PR #24 is the corrected replacement. No merge was performed.
+
+The weighted project estimate remains 68.35% until the new exact-head validation evidence is available. All production activation, public network exposure and deployment restrictions remain unchanged.
