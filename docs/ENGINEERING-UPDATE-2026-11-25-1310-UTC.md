@@ -107,3 +107,15 @@ A deeper review of PR #24's network-isolation guards found a default-value misma
 - PR #21's older branch still contains the pre-fix fallback and is explicitly marked superseded; PR #24 is the corrected replacement. No merge was performed.
 
 The weighted project estimate remains 68.35% until the new exact-head validation evidence is available. All production activation, public network exposure and deployment restrictions remain unchanged.
+
+
+## Lint correction addendum — 25 November 2026
+
+The first NAT-PMP fix used `#include <mapport.h>` to reuse `DEFAULT_NATPMP`. The new exact-head full-CI lint job `139238056289` caught the circular dependency `chainparams -> mapport -> net -> chainparams`. The include was removed; the startup translation unit now uses a documented local `FREELY_DEFAULT_NATPMP{true}` constant matching Bitcoin Core v32.1's `DEFAULT_NATPMP` value, avoiding the dependency cycle while retaining the default-on regression test.
+
+- Lint-failing head: `c7c2196c2924a7f074d81bcbf22b08bad99a3bfd` (full CI `45623537314`).
+- Lint correction commits: `23535791fc2a79179c977433c6ba7edb2c5acb62`, `581cfef29872bcbdb37f939637c98adb4d2574d5`.
+- Current PR #24 head: `581cfef29872bcbdb37f939637c98adb4d2574d5`.
+- New-head security workflow `45624145023` and offline-wallet workflow `45624145332` are in progress; full CI `45624145214` is pending. No new-head build/test pass is claimed.
+
+The prior lint failure was actionable and code-related, not a runner outage. The current branch remains unmerged pending fresh exact-head CI.
