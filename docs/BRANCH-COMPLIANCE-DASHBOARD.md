@@ -641,3 +641,111 @@ The previous weighted estimate was 65.7%. The 1.65-point increase reflects the m
 3. Inspect PR #11 wallet/node readiness and PR #18 genesis miner results when their focused jobs leave the queue.
 4. Review the complete diffs and Bitcoin Core v32.1 compatibility before any PR merge. No PR is eligible to merge while required checks remain queued or pending.
 5. Keep normal FREELY startup fail-closed. Production genesis activation, public network exposure, DNS seeds, mining deployment, paid services and launch remain separately unauthorized.
+
+
+## Live engineering refresh — 26 November 2026
+
+This snapshot supersedes prior CI and PR-status tables above where they conflict. Repository refs, PR heads, comparisons, workflow runs, job states and selected failure logs were refreshed from GitHub during this run.
+
+### Repository and branch inventory
+
+- `Schmacko/freely-core`: default `main` at `710c05b84f7551d00b1316eedb6d11ca077e7f1f`.
+- `Schmacko/freely-bitcoin-core.`: default `master` at `498b598cf27317b7306a859ce82b0571a0f9e348`.
+- Pinned integration baseline `freely/upstream-v32.1`: `0f27415ebe114f3e93157a4b3c95e7670012dee1`.
+- PR #1 is merged into `freely/upstream-v32.1`, not into default `master`.
+- The implementation repository now has **45 branch refs: 44 FREELY-named refs plus `master`**. The increase from the previous 43 FREELY-named refs is the new PR #25 replacement branch. The coordination repository has `docs/freely-foundation`, `m1-consensus-design` and `main`.
+- There are 15 open PRs across both repositories: coordination PR #2 and implementation PRs #4–#25 (with the gaps shown in the inventory below). PR #24 is retained temporarily as superseded audit history; PR #21 remains an older alternative lineage.
+
+### Current scored PR branches
+
+The percentages below estimate scope completion only. They are not CI, review, merge or production-readiness scores.
+
+| PR | Branch | Exact head | Estimate | Current state |
+|---:|---|---|---:|---|
+| freely-core [#2](https://github.com/Schmacko/freely-core/pull/2) | `m1-consensus-design` | `6155725d3740c3ed468fcaaa2949b6149be75cb0` | 85% | Open draft; 29 commits ahead of `main`; no Actions run associated with this head |
+| [#4](https://github.com/Schmacko/freely-bitcoin-core./pull/4) | `freely/pow-difficulty-audit` | `92d0c7957fd054c74a195de2ba8133cabd696a18` | 90% | Full CI failed on CMake 4.5 `non-target-directive` diagnostics |
+| [#5](https://github.com/Schmacko/freely-bitcoin-core./pull/5) | `freely/retarget-policy` | `3d5006d411ed2781985d00506c3e1a3c36675962` | 95% | Full CI failed on the same CMake 4.5 diagnostic; two matrix jobs cancelled |
+| [#6](https://github.com/Schmacko/freely-bitcoin-core./pull/6) | `freely/retarget-test-vectors` | `5cbca965a9340f85631804a5fa5c827a3b79b015` | 90% | Full CI **29/29 passed**, including ancestor replay; focused retarget and M1 workflows passed; branch is 4 ahead / 25 behind upstream |
+| [#8](https://github.com/Schmacko/freely-bitcoin-core./pull/8) | `freely/core-chain-implementation` | `370d4a436b7218e77de25dc296d14e01b38de589` | 75% | Focused M1 workflow passed; full CI conclusion success but ancestor-replay job was skipped (28/29); not a strict full pass |
+| [#10](https://github.com/Schmacko/freely-bitcoin-core./pull/10) | `freely/network-safety-preflight` | `77106e215d5a04c4e6529650e3f8cbcb6a066e17` | 75% | Focused preflight passed; full CI has 26 successes and 3 cancelled jobs |
+| [#11](https://github.com/Schmacko/freely-bitcoin-core./pull/11) | `freely/wallet-node-readiness` | `86aeb0676c3bfd81fb896177cf3baedf0a558cad` | 70% | Focused wallet/node workflow passed; full CI conclusion success but ancestor replay skipped (28/29); not a strict full pass |
+| [#12](https://github.com/Schmacko/freely-bitcoin-core./pull/12) | `freely/reconciled-docs` | `9d772339ab85fc38e2d67c591999c57aee11babd` | 95% | Focused specification checks passed; full CI failed in ancestor replay and Windows configure/build; CMake 4.5 diagnostic confirmed in logs |
+| [#17](https://github.com/Schmacko/freely-bitcoin-core./pull/17) | `freely/genesis-and-network-code` | `8a567e0f11a3405d62f52b4b3a7c89869f1d5ec3` | 85% | Focused core-chain workflow passed; full CI conclusion success but ancestor replay skipped (28/29); not a strict full pass |
+| [#18](https://github.com/Schmacko/freely-bitcoin-core./pull/18) | `freely/genesis-miner-implementation` | `8e81ea9fbf9c0b079bad1d14e8383cd36a4912b5` | 95% | Full CI **29/29 passed**, including ancestor replay; focused genesis proof-of-work verification passed; stacked on #17 |
+| [#21](https://github.com/Schmacko/freely-bitcoin-core./pull/21) | `freely/private-node-startup` | `8423e716103ca6e64373f97e4763e8c62f447d71` | 89% | Candidate, wallet and security focused workflows passed; full CI has two cancelled macOS jobs and skipped ancestor replay; stale alternative to #25 |
+| [#22](https://github.com/Schmacko/freely-bitcoin-core./pull/22) | `freely/chainparams-reconciled-20261122` | `87e494b444889ae5aacd6b35fdd2313ed115115e` | 92% | Focused core-chain workflow passed; full CI retry queued with ancestor replay passed, macOS native queued and macOS native-fuzz cancelled |
+| [#23](https://github.com/Schmacko/freely-bitcoin-core./pull/23) | `freely/ci-cmake-4-5-compat` | `250d6657da43967240dacec246a45159bfc6cbb3` | 95% | Independent CMake 4.5 CI fix; 27 matrix jobs succeeded, macOS native-fuzz retry queued and Alpine (musl) cancelled; no full pass |
+| [#25](https://github.com/Schmacko/freely-bitcoin-core./pull/25) | `freely/private-node-integration-squashed-20261126` | `e46167bc48b2037fe8e368e7c64ce2ec5bdbb830` | 85% | New draft replacement for #24; two commits ahead / zero behind #22; full CI and focused security/wallet workflows are pending or in progress |
+
+Superseded PR #24 remains open only for audit traceability at head `0437c8e68ca36bd165331c10412c9160ae06af95` (estimated 85%). Its focused security and wallet workflows passed, but full CI failed ancestor replay at intermediate commit `ebc45da690c463f1b1253eba055782d23ffbc334`. Do not merge #24; PR #25 is its replacement.
+
+### Exact workflow evidence
+
+- PR #6 full CI [45034083216](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45034083216): 29/29 successful, including ancestor replay.
+- PR #8 full CI [45028307701](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45028307701): 28 successful plus skipped ancestor replay.
+- PR #11 full CI [45028317116](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45028317116): 28 successful plus skipped ancestor replay.
+- PR #17 full CI [45028325268](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45028325268): 28 successful plus skipped ancestor replay.
+- PR #18 full CI [45204040649](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45204040649): 29/29 successful, including ancestor replay.
+- PR #22 full CI [45413263894](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45413263894): retry active; macOS native queued, macOS native-fuzz cancelled, ancestor replay successful.
+- PR #23 full CI [45204795368](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45204795368): 27 successes; macOS native-fuzz queued and Alpine cancelled. The macOS retry was accepted; the Alpine retry was blocked while the workflow run was active.
+- PR #25 full CI [45832040012](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45832040012): latest head `e46167bc48b2037fe8e368e7c64ce2ec5bdbb830`; ancestor replay is now running because the branch has a second commit. Focused private-node security [45832040167](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45832040167) and offline-wallet [45832039994](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45832039994) are in progress. No new-head pass is claimed.
+- PR #4 [44910339764](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44910339764), #5 [44910342400](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/44910342400) and #12 [45206228485](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45206228485) logs confirm CMake 4.5's `non-target-directive` diagnostic is promoted to an error by `-Werror=dev` in vendored secp256k1 configuration. PR #23 scopes a compatibility suppression to this diagnostic while retaining the other warning-as-error policy; its complete matrix is still incomplete.
+- PR #10 [45206108420](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45206108420) has three cancelled jobs, including macOS native and ancestor replay. PR #21 [45428003881](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45428003881) has two cancelled macOS jobs and skipped ancestor replay.
+
+Under the project's strict policy, queued, pending, cancelled and skipped jobs are not passes. Only PRs #6 and #18 currently have fully successful 29/29 matrices including ancestor replay. The apparent success conclusion on #8, #11 and #17 is not a complete strict pass because the ancestor job was skipped for their one-commit PRs.
+
+### PR #25 replacement and code review notes
+
+PR #24's ancestor-replay failure was traced to an intermediate commit that introduced the default-on NAT-PMP guard before all test fixtures were updated. The final tree contained the corrections, but replaying that intermediate commit failed. Rather than weakening CI, a new branch was created with a single complete snapshot commit `1836cb737f825f4a7715dc4ef8e41c5559cf51cf`, followed by IPv6 loopback-binding regression test commit `e46167bc48b2037fe8e368e7c64ce2ec5bdbb830`. The duplicate `-natpmp=0` fixture assignment was removed.
+
+The 16-file replacement diff was reviewed across chain selection, startup validation, runtime `addnode`, wallet/key encodings, functional tests, PoW/BIP94 vectors and CI workflows. The security model remains:
+- ordinary FREELY startup fails closed unless exactly one development gate is explicit;
+- offline mode disables inbound/outbound peers and external discovery/port mapping;
+- private mode binds only literal IPv4/IPv6 loopback addresses and restricts runtime peers to loopback;
+- proxy/overlay, remote RPC, external discovery and ZMQ publish paths are rejected;
+- candidate genesis and consensus values remain candidate-only and production startup is not activated.
+
+No unresolved inline review threads were returned for implementation PRs #4–#25. Submitted review objects were empty on #22, #23 and #25 at this inspection. PR #25 remains draft; no merge was performed.
+
+### Completion estimates and denominator discipline
+
+The established phase weights and estimates remain unchanged because this run added validation and a replacement/test commit but did not complete a new implementation milestone:
+
+| Phase | Estimate | Weight |
+|---|---:|---:|
+| Foundation | 100% | 5% |
+| Consensus specification | 92% | 15% |
+| Network architecture | 88% | 10% |
+| Core implementation | 65% | 25% |
+| Testing | 50% | 15% |
+| Wallet/node readiness | 45% | 10% |
+| Mining | 90% | 5% |
+| Security | 75% | 10% |
+| Testnet | 10% | 5% |
+| Production readiness | 0% | 5% |
+| **Weighted overall estimate** | **68.35%** | **100%** |
+
+- Scored PR-branch mean: **86.9% (14 branches)**. PR #25 replaces #24 in this denominator; #24 is excluded as superseded. The still-open but stale #21 alternative remains included for continuity with the prior 14-branch baseline.
+- Historical all-feature-branch scored mean: **91.4% (25 scored branches)**. The implementation repository has 44 FREELY-named refs; 19 retained/snapshot refs are unscored. This is not a claim that every branch ref is 91.4%.
+- The prior baseline was 86.9% across 14 PR branches and 91.4% across 25 scored feature branches. Denominators are unchanged for scored workstreams; the #24 → #25 replacement is not double-counted.
+- Default branches and `freely/upstream-v32.1` are excluded from feature-branch averages.
+
+### Work completed in this run
+
+1. Re-inspected both repository defaults, branch refs, all open PR heads, ancestry comparisons, workflow runs, job results and available review threads.
+2. Inspected full-CI job logs and confirmed the shared CMake 4.5 diagnostic affecting PRs #4, #5 and #12.
+3. Replaced the transient 10-commit PR #24 history with PR #25's one-commit snapshot branch to avoid weakening ancestor-replay CI; removed the duplicate NAT-PMP fixture assignment.
+4. Added a unit regression proving that the loopback-private mode accepts an explicit IPv6 loopback binding. PR #25 now has two commits so ancestor replay is exercised rather than skipped.
+5. Updated PR #24 and PR #25 descriptions with the exact replacement lineage, SHAs and validation evidence.
+6. Retried PR #23's macOS native-fuzz job and PR #22's macOS native job. The remaining Alpine and macOS native-fuzz retries are still blocked by active/cancelled workflow state and need another attempt when the run is idle.
+7. No PR was merged and no public or production network action was taken.
+
+### Next actions
+
+1. Let PR #25's exact-head full CI, ancestor replay, security and wallet jobs finish; inspect every failure log and correct deterministic defects.
+2. Retry PR #23's Alpine (musl) job and finish its complete 29-job matrix before considering the independent CMake compatibility fix.
+3. Complete PR #22's remaining macOS native-fuzz job.
+4. Once PR #23 is fully green, rebase/revalidate PRs #4, #5 and #12 on the compatible CI baseline.
+5. Reconcile PR #6's 25-commit divergence before merge consideration.
+6. Treat PR #8, #11 and #17 as incomplete until their skipped ancestor checks are replaced by actual successful required checks.
+7. Preserve fail-closed production startup. Do not select or activate unapproved powLimit/genesis/initial difficulty/network identity/activation parameters, publish DNS seeds, launch public testnet/mainnet, deploy mining, pay for infrastructure or expose public services.
