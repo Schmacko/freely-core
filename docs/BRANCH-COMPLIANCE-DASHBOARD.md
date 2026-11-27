@@ -749,3 +749,84 @@ The established phase weights and estimates remain unchanged because this run ad
 5. Reconcile PR #6's 25-commit divergence before merge consideration.
 6. Treat PR #8, #11 and #17 as incomplete until their skipped ancestor checks are replaced by actual successful required checks.
 7. Preserve fail-closed production startup. Do not select or activate unapproved powLimit/genesis/initial difficulty/network identity/activation parameters, publish DNS seeds, launch public testnet/mainnet, deploy mining, pay for infrastructure or expose public services.
+
+
+---
+
+## Live engineering refresh — 27 November 2026
+
+This snapshot supersedes the 26 November CI/status snapshot above. Full exact-head workflow runs, job states, selected logs, repository refs and review threads were rechecked during this cycle. Detailed report: [ENGINEERING-UPDATE-2026-11-27-1357-UTC.md](ENGINEERING-UPDATE-2026-11-27-1357-UTC.md).
+
+### Repository heads and branch inventory
+
+- `Schmacko/freely-core`: default `main` at `710c05b84f7551d00b1316eedb6d11ca077e7f1f`.
+- `Schmacko/freely-bitcoin-core.`: default `master` at `498b598cf27317b7306a859ce82b0571a0f9e348`.
+- Pinned integration baseline `freely/upstream-v32.1`: `0f27415ebe114f3e93157a4b3c95e7670012dee1`.
+- PR #1 remains merged into `freely/upstream-v32.1`, not default `master`.
+- Implementation repository: 45 `freely/*` refs (44 feature refs plus the pinned upstream baseline). Eighteen retained/snapshot feature refs are currently unscored.
+
+### Current open PR branch inventory
+
+| PR | Branch | Exact head | Estimated work | Latest exact-head CI |
+|---:|---|---|---:|---|
+| freely-core #2 | `m1-consensus-design` | `0b1b5ab67ea655b5db759319f5fa0c4d12da293e` | 85% | Documentation update; no executable CI claim |
+| #4 | `freely/pow-difficulty-audit` | `92d0c7957fd054c74a195de2ba8133cabd696a18` | 90% | Failed: CMake 4.5 `non-target-directive` |
+| #5 | `freely/retarget-policy` | `3d5006d411ed2781985d00506c3e1a3c36675962` | 95% | Failed: same CMake 4.5 blocker |
+| #6 | `freely/retarget-test-vectors` | `5cbca965a9340f85631804a5fa5c827a3b79b015` | 90% | Full CI 29/29 passed; 4 ahead / 25 behind upstream |
+| #8 | `freely/core-chain-implementation` | `370d4a436b7218e77de25dc296d14e01b38de589` | 75% | CI conclusion success; ancestor replay skipped |
+| #10 | `freely/network-safety-preflight` | `77106e215d5a04c4e6529650e3f8cbcb6a066e17` | 75% | Focused pass; full CI has 3 cancelled jobs |
+| #11 | `freely/wallet-node-readiness` | `86aeb0676c3bfd81fb896177cf3baedf0a558cad` | 70% | Focused pass; ancestor replay skipped |
+| #12 | `freely/reconciled-docs` | `9d772339ab85fc38e2d67c591999c57aee11babd` | 95% | Focused spec pass; full CI failed |
+| #17 | `freely/genesis-and-network-code` | `8a567e0f11a3405d62f52b4b3a7c89869f1d5ec3` | 85% | Focused pass; ancestor replay skipped |
+| #18 | `freely/genesis-miner-implementation` | `8e81ea9fbf9c0b079bad1d14e8383cd36a4912b5` | 95% | Full CI 29/29 passed; depends on #17 |
+| #21 | `freely/private-node-startup` | `8423e716103ca6e64373f97e4763e8c62f447d71` | 89% | Older alternative; full CI incomplete |
+| #22 | `freely/chainparams-reconciled-20261122` | `87e494b444889ae5aacd6b35fdd2313ed115115e` | 92% | Focused pass; full CI 27 success, 1 queued, 1 cancelled |
+| #23 | `freely/ci-cmake-4-5-compat` | `250d6657da43967240dacec246a45159bfc6cbb3` | 95% | Full CI 27 success, 1 queued, 1 cancelled |
+| #25 | `freely/private-node-integration-squashed-20261126` | `e46167bc48b2037fe8e368e7c64ce2ec5bdbb830` | 85% | Security + wallet focused passes; full CI 27 success, 1 queued, 1 cancelled |
+| #26 | `freely/issuance-consensus-binding-20261126` | `4b97c8aa607d30ca3cd4cb6ea10b23050753ea87` | 85% | Full CI 46012031290: 1 success, 18 in progress, 8 queued |
+
+PR #24 remains open only for audit traceability at `56a0012480c5014c9cd77f764bb6f53c80bcccef` and is superseded by PR #25. PR #21 is an older alternative lineage and is not the selected private-node integration path.
+
+### New code/test correction
+
+PR #26 binds monetary-policy regression tests to `CChainParams::FreelyCandidate()`, checks the 20,999,999.9769 FLY scheduled issuance and 20,999,949.9769 FLY maximum spendable issuance, and adds a height-1 block-template assertion to the private loopback functional test.
+
+The previous exact-head full CI run [45839153062](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45839153062) exposed a date-dependent test assumption: `getblocktemplate` correctly refused service while the fixed candidate genesis was older than the default maximum tip age. The test fixture now sets test-only `-maxtipage=3153600000`; no consensus or production default changed.
+
+- Fix commit and current PR #26 head: `4b97c8aa607d30ca3cd4cb6ea10b23050753ea87`.
+- Fresh full CI [46012031290](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46012031290) is in progress (1 success, 18 running, 8 queued); no C++ build/test pass is claimed yet.
+
+### Exact validation and blockers
+
+- PR #25 focused private-node security [45832040167](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45832040167) and offline-wallet [45832039994](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45832039994) passed on exact head `e46167bc48b2037fe8e368e7c64ce2ec5bdbb830`. Full CI [45832040012](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45832040012) still has one queued macOS-native job and one cancelled MSan/fuzz job.
+- PR #22 full CI [45413263894](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45413263894) has one queued macOS-native job and one cancelled macOS-native-fuzz job; focused core-chain workflow [45413263918](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45413263918) passed.
+- PR #23 full CI [45204795368](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45204795368) has one queued macOS-native-fuzz job and one cancelled Alpine/musl job. The CMake 4.5 compatibility fix is not fully validated.
+- PR #6 [45034083216](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45034083216) and PR #18 [45204040649](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45204040649) are 29/29 full-matrix passes including ancestor replay. PR #6's 25-commit divergence and PR #18's PR #17 dependency still block merge.
+- PRs #8, #11 and #17 have successful overall CI conclusions but skipped ancestor-replay jobs; under strict policy these are not complete full-matrix passes.
+- PRs #4, #5 and #12 still require revalidation after the CMake compatibility fix reaches the integration base.
+- No unresolved inline review threads were returned for the inspected open PR inventory. GitHub reports open PRs mergeable; that does not override incomplete checks or dependencies.
+
+### Completion and denominator update
+
+| Phase | Estimate | Weight |
+|---|---:|---:|
+| Foundation | 100% | 5% |
+| Consensus specification | 92% | 15% |
+| Network architecture | 88% | 10% |
+| Core implementation | 65% | 25% |
+| Testing | 51% | 15% |
+| Wallet/node readiness | 45% | 10% |
+| Mining | 90% | 5% |
+| Security | 75% | 10% |
+| Testnet | 10% | 5% |
+| Production readiness | 0% | 5% |
+| **Weighted overall estimate** | **68.50%** | **100%** |
+
+- Active open-PR branch mean: **86.7% across 15 branches** (includes coordination PR #2 and the older PR #21 alternative; excludes superseded PR #24).
+- Prior active-PR baseline: **86.9% across 14 branches**. Denominator +1 reflects new PR #26.
+- All scored feature-branch mean: **91.2% across 26 branches**, derived from the prior 91.4% across 25 plus PR #26's 85% estimate. This excludes the upstream baseline and 18 unscored retained/snapshot feature refs.
+- Work-completion estimates remain separate from successful CI, merge, independent security review and production readiness.
+
+### Merge and release decision
+
+No PR was merged this cycle. Do not merge while any required check is queued, cancelled, skipped or failed, or while dependencies/history are unresolved. Keep normal FREELY startup fail-closed. No production genesis activation, public network launch, DNS seeds, mining deployment, paid infrastructure or public exposure is authorized.
