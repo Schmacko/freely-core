@@ -899,3 +899,11 @@ PR #23 is merged and excluded from active-PR averages. PR #24 is superseded by #
 Only PR #23 was merged, into the dedicated integration branch, not default `master`. No other PR currently meets all merge conditions. Normal FREELY startup remains fail-closed; candidate parameters remain offline-validation-only. No production genesis activation, public testnet/mainnet launch, DNS seeds, public mining, deployment, paid infrastructure or public exposure occurred.
 
 Detailed report: [ENGINEERING-UPDATE-2026-11-28-1333-UTC.md](ENGINEERING-UPDATE-2026-11-28-1333-UTC.md).
+
+
+### CI pulse — 28 November 2026, 13:51 UTC
+
+- PR #26 exact head `a3a3042b2bbe7d33ff6f67004175dbe9a75f171b`, run `46150590448`: 2 jobs successful (lint and frozen-commit metadata), 20 in progress, 5 queued. No C++ build or test job had completed successfully at this snapshot; ancestor replay was still running.
+- PR #25 full CI attempt 4: 28 jobs successful, MSan/fuzz retry job `140996365407` queued.
+- PR #4 and #5 full CI runs `46151185805` and `46151193651`: 25 jobs queued on each run.
+- Merged-base push run `46150997814`: 24 jobs queued, one ancestor job skipped because this is a push event.
