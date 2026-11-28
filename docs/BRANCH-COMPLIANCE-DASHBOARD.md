@@ -849,7 +849,7 @@ No PR was merged this cycle. Do not merge while any required check is queued, ca
 | #2 | `m1-consensus-design` | `ef71a0c716c01be112cb8d1cbb7abec052815d49` | 85% | Open draft; documentation/coordination |
 | #4 | `freely/pow-difficulty-audit` | `8576438636fd79749a7048c55430d485e9a192d7` | 90% | Synchronized with CI baseline; full CI queued |
 | #5 | `freely/retarget-policy` | `eaa64a77dd28cf4366a057acf6753f66d0406fd1` | 95% | Synchronized with CI baseline; full CI queued |
-| #6 | `freely/retarget-test-vectors` | `5cbca965a9340f85631804a5fa5c827a3b79b015` | 90% | 26 commits behind updated base; reconcile CI overlap |
+| #6 | `freely/retarget-test-vectors` | `00c6afec352aa1c3460432a28404391b48cce6d7` | 90% | Synchronized 5 ahead, 0 behind; fresh full CI queued |
 | #8 | `freely/core-chain-implementation` | `370d4a436b7218e77de25dc296d14e01b38de589` | 75% | 1 commit behind updated base; ancestor check skipped historically |
 | #10 | `freely/network-safety-preflight` | `77106e215d5a04c4e6529650e3f8cbcb6a066e17` | 75% | 1 commit behind updated base; full CI has cancelled jobs |
 | #11 | `freely/wallet-node-readiness` | `86aeb0676c3bfd81fb896177cf3baedf0a558cad` | 70% | Focused pass; ancestor check skipped historically |
@@ -870,7 +870,7 @@ PR #23 is merged and excluded from active-PR averages. PR #24 is superseded by #
 - PR #25 exact head `e46167bc48b2037fe8e368e7c64ce2ec5bdbb830`: private-node security `45832040167` and offline wallet `45832039994` success; MSan/fuzz retry attempt 4 queued as job `140996365407`.
 - PR #26 exact head `a3a3042b2bbe7d33ff6f67004175dbe9a75f171b`: full CI `46150590448` running; ancestor replay is running. No new-head C++ test pass is claimed.
 - PR #4 and #5 have been synchronized with the merged CMake baseline using merge commits `8576438636fd79749a7048c55430d485e9a192d7` and `eaa64a77dd28cf4366a057acf6753f66d0406fd1`. Their new full CI runs `46151185805` and `46151193651` are queued.
-- PR #6 full CI `45034083216` and PR #18 full CI `45204040649` are historical 29/29 passes. PR #6 is now 26 commits behind the integration base; PR #18 still depends on #17.
+- PR #6's old head `5cbca965a9340f85631804a5fa5c827a3b79b015` and PR #18's head `8e81ea9fbf9c0b079bad1d14e8383cd36a4912b5` had historical 29/29 passes. PR #6 is now synchronized at `00c6afec352aa1c3460432a28404391b48cce6d7`; fresh exact-head workflows are queued. PR #18 still depends on #17.
 - PR #8, #11 and #17 have successful overall CI conclusions but their one-commit ancestor jobs were skipped. Do not label skipped jobs as passes.
 - PR #10 has three cancelled jobs in its last full CI run. PR #12's last full CI run failed on CMake/ancestor checks. Both require reconciliation/revalidation.
 
