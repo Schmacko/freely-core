@@ -907,3 +907,15 @@ Detailed report: [ENGINEERING-UPDATE-2026-11-28-1333-UTC.md](ENGINEERING-UPDATE-
 - PR #25 full CI attempt 4: 28 jobs successful, MSan/fuzz retry job `140996365407` queued.
 - PR #4 and #5 full CI runs `46151185805` and `46151193651`: 25 jobs queued on each run.
 - Merged-base push run `46150997814`: 24 jobs queued, one ancestor job skipped because this is a push event.
+
+
+## Live engineering refresh — 28 November 2026, 14:01 UTC
+
+- Detailed report: [ENGINEERING-UPDATE-2026-11-28-1401-UTC.md](ENGINEERING-UPDATE-2026-11-28-1401-UTC.md).
+- PR #8 gained explicit invalid-enum rejection in `ChainTypeToString`, `CreateBaseChainParams` and `CreateChainParams`, plus a regression test. Exact head: `524c5216db98f9d495a704d980af6edae1c8d778`; full CI [46152964192](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46152964192) and focused consensus tests [46152964218](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46152964218) are queued.
+- PR #17 and PR #11 are each 1 commit ahead / 7 behind the updated PR #8 base and require dependency reconciliation. Their older CI results are not current-head evidence.
+- PR #10 and PR #12 have been synchronized with integration head `40fda3525a323098e76b36a9f33a05a0b02f21e3`; their fresh full and focused workflows are queued.
+- PR #26 full CI [46150590448](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46150590448): 4 successful, 18 in progress, 5 queued, no failures at the latest poll. No C++ test pass is claimed yet.
+- PR #25 remains 28/29 successful with its MSan/fuzz retry queued; PR #22 is 29/29 successful but depends on PR #17. PR #23 is merged at `40fda3525a323098e76b36a9f33a05a0b02f21e3` after 29/29 full CI.
+- Weighted work estimate remains 68.50%; active-PR mean 86.1% (14 branches); all scored feature-branch mean 91.4% (26 branches). These remain estimates, not validation scores.
+- No PR merged in this update. Production startup remains fail-closed; no genesis activation or public network launch occurred.
