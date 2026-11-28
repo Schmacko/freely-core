@@ -919,3 +919,12 @@ Detailed report: [ENGINEERING-UPDATE-2026-11-28-1333-UTC.md](ENGINEERING-UPDATE-
 - PR #25 remains 28/29 successful with its MSan/fuzz retry queued; PR #22 is 29/29 successful but depends on PR #17. PR #23 is merged at `40fda3525a323098e76b36a9f33a05a0b02f21e3` after 29/29 full CI.
 - Weighted work estimate remains 68.50%; active-PR mean 86.1% (14 branches); all scored feature-branch mean 91.4% (26 branches). These remain estimates, not validation scores.
 - No PR merged in this update. Production startup remains fail-closed; no genesis activation or public network launch occurred.
+
+
+### CI poll refresh — 28 November 2026, 14:12 UTC
+
+- PR #26 full CI [46150590448](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46150590448): 6 successful, 16 in progress, 5 queued; no failures. Windows native build and ancestor replay remain in progress. No current-head C++ test pass yet.
+- PR #25 full CI [45832040012](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45832040012): 28 successful, 1 MSan/fuzz retry queued.
+- PR #4 full CI [46151185805](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46151185805): 1 successful, 2 in progress, 24 queued; PR #5 [46151193651](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46151193651): 25 queued.
+- PR #6 full CI [46151958684](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46151958684): 1 successful, 1 in progress, 25 queued; focused retarget and M1 workflows remain queued.
+- PR #8 full CI [46152964192](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46152964192) and focused consensus [46152964218](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46152964218): queued.
