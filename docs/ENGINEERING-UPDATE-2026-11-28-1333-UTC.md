@@ -93,7 +93,7 @@ The previous failed CMake 4.5 runs are historical. Neither new head is considere
 | #2 | `m1-consensus-design` | `ef71a0c716c01be112cb8d1cbb7abec052815d49` | 85% | Open draft, coordination/docs |
 | #4 | `freely/pow-difficulty-audit` | `8576438636fd79749a7048c55430d485e9a192d7` | 90% | Fresh full CI queued |
 | #5 | `freely/retarget-policy` | `eaa64a77dd28cf4366a057acf6753f66d0406fd1` | 95% | Fresh full CI queued |
-| #6 | `freely/retarget-test-vectors` | `5cbca965a9340f85631804a5fa5c827a3b79b015` | 90% | Historical 29/29 pass; now 26 commits behind updated base; CI/helper overlap |
+| #6 | `freely/retarget-test-vectors` | `00c6afec352aa1c3460432a28404391b48cce6d7` | 90% | Synchronized 5 ahead, 0 behind; fresh full CI queued |
 | #8 | `freely/core-chain-implementation` | `370d4a436b7218e77de25dc296d14e01b38de589` | 75% | Historical overall CI success with ancestor replay skipped; now 1 behind updated base |
 | #10 | `freely/network-safety-preflight` | `77106e215d5a04c4e6529650e3f8cbcb6a066e17` | 75% | Focused pass; full CI had 3 cancelled jobs; now 1 behind updated base |
 | #11 | `freely/wallet-node-readiness` | `86aeb0676c3bfd81fb896177cf3baedf0a558cad` | 70% | Focused pass; full CI success with ancestor replay skipped |
@@ -110,7 +110,7 @@ PR #23 is merged and is no longer an active PR branch. PR #24 remains open only 
 ## Dependency and integration blockers
 
 - Main integration path remains #8 → #17 → #22 → #25 → #26; PR #11 depends on #8 and PR #18 depends on #17.
-- PRs #6, #8, #10 and #12 require explicit rebase/reconciliation against the updated integration base. Their prior CI does not validate the new base.
+- PR #6 has been synchronized with the updated base and needs fresh exact-head CI. PRs #8, #10 and #12 still require explicit rebase/reconciliation; their prior CI does not validate the new base.
 - PR #4 and #5 are now synchronized and have fresh CI queued.
 - PR #25's MSan/fuzz retry and PR #26's new full CI remain pending.
 - No unresolved inline review threads were returned for PRs #2, #4, #5, #6, #23, #25 or #26. No merge is attempted for the remaining PRs while checks, conflicts or dependencies remain unresolved.
