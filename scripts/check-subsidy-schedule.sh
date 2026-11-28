@@ -36,4 +36,37 @@ if (( last_nonzero_era != EXPECTED_LAST_NONZERO_ERA )); then
   exit 1
 fi
 
-echo "PASS: proposed subsidy arithmetic matches the documented supply ceiling."
+# Check exact block-height boundaries as well as cumulative issuance.
+subsidy_at_height() {
+  local height="$1"
+  local halvings
+  if (( height < 0 )); then
+    return 1
+  fi
+  halvings=$(( height / HALVING_INTERVAL ))
+  if (( halvings >= 64 )); then
+    printf '0'
+  else
+    printf '%d' "$(( INITIAL_SUBSIDY_BASE_UNITS >> halvings ))"
+  fi
+}
+
+while read -r height expected; do
+  actual="$(subsidy_at_height "$height")"
+  if [[ "$actual" != "$expected" ]]; then
+    printf 'FAIL: height %d expected %d base units, got %d.\n' "$height" "$expected" "$actual" >&2
+    exit 1
+  fi
+done <<'BOUNDARIES'
+0 5000000000
+209999 5000000000
+210000 2500000000
+419999 2500000000
+420000 1250000000
+630000 625000000
+1260000 78125000
+6720000 1
+6930000 0
+BOUNDARIES
+
+echo "PASS: cumulative issuance and all selected subsidy boundaries match."
