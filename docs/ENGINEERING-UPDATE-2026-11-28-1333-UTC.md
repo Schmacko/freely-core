@@ -59,7 +59,7 @@ The existing monetary-policy unit test now also asserts against `CChainParams::F
 
 This is test coverage only. It does not choose or change `powLimit`, genesis, initial difficulty, BIP94, activation heights, network identity or production startup policy.
 
-The branch is 2 commits ahead and 0 behind PR #25's base. Full CI [46150590448](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46150590448) has started; the ancestor-replay job is running. At the last inspection, 16 jobs were in progress and 8 queued. No new-head C++ test pass is claimed.
+The branch is 2 commits ahead and 0 behind PR #25's base. Full CI [46150590448](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46150590448) has started; the ancestor-replay job is running. At 13:51 UTC, 20 jobs were in progress, 5 queued and 2 successful; no failures had been reported. The successful jobs were lint and frozen-commit metadata only, not C++ compilation or tests. No new-head C++ test pass is claimed.
 
 The previous one-commit head `cd86bc6144afb651e37fb36affe1524f040840a0` had 26 successful jobs, two cancelled jobs (MSan/fuzz and Alpine/musl), and ancestor replay skipped by the upstream one-commit condition. The second commit makes ancestor replay eligible on the new head.
 
