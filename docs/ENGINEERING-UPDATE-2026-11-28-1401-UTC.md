@@ -45,7 +45,7 @@ Exact-head validation:
 
 Exact head `a3a3042b2bbe7d33ff6f67004175dbe9a75f171b`.
 
-- Full CI [46150590448](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46150590448): **4 successful, 18 in progress, 5 queued**, no failures at the latest poll.
+- Full CI [46150590448](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46150590448): **6 successful, 16 in progress, 5 queued**, no failures at the latest poll.
 - The Windows native build and ancestor replay were running; the full matrix is not complete.
 - The tests bind issuance assertions to the FREELY candidate parameters, assert the approved 600-second/2,016-block retarget schedule, and test the height-1 block template without mining or changing production settings.
 
@@ -56,9 +56,9 @@ Completion percentages are work-scope estimates, not test or release-readiness s
 | PR | Branch | Exact head | Estimate | Current status |
 |---:|---|---|---:|---|
 | freely-core #2 | `m1-consensus-design` | `1c0b0954768ec3d590b57e4fe843192da0f1130a` | 85% | Open draft; documentation/coordination |
-| #4 | `freely/pow-difficulty-audit` | `8576438636fd79749a7048c55430d485e9a192d7` | 90% | Full CI: 1 in progress, 24 queued |
+| #4 | `freely/pow-difficulty-audit` | `8576438636fd79749a7048c55430d485e9a192d7` | 90% | Full CI: 1 success, 2 in progress, 24 queued |
 | #5 | `freely/retarget-policy` | `eaa64a77dd28cf4366a057acf6753f66d0406fd1` | 95% | Full CI: 25 queued |
-| #6 | `freely/retarget-test-vectors` | `00c6afec352aa1c3460432a28404391b48cce6d7` | 90% | Full CI and both focused workflows queued |
+| #6 | `freely/retarget-test-vectors` | `00c6afec352aa1c3460432a28404391b48cce6d7` | 90% | Full CI: 1 success, 1 in progress, 25 queued; both focused workflows queued |
 | #8 | `freely/core-chain-implementation` | `524c5216db98f9d495a704d980af6edae1c8d778` | 75% | Full and focused CI pending |
 | #10 | `freely/network-safety-preflight` | `782df0ca3d861f9934bc30f5a5aca79f1e85e1d1` | 75% | Synchronized; full and focused CI queued |
 | #11 | `freely/wallet-node-readiness` | `86aeb0676c3bfd81fb896177cf3baedf0a558cad` | 70% | 1 ahead/7 behind updated PR #8 base; rebase required |
@@ -122,3 +122,14 @@ Normal FREELY startup remains fail-closed. The approved subsidy schedule remains
 6. Reconcile PR #18 after its PR #17 dependency is updated.
 7. Do not merge any branch with pending, skipped, cancelled, failed or stale-head checks.
 
+
+
+### CI poll refresh — 28 November 2026, 14:12 UTC
+
+- PR #26 full CI [46150590448](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46150590448): **6 successful, 16 in progress, 5 queued**; no failures. Windows native build and ancestor replay remain in progress. No C++ test pass is claimed yet.
+- PR #25 full CI [45832040012](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/45832040012): **28 successful, 1 MSan/fuzz retry queued**.
+- PR #4 full CI [46151185805](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46151185805): 1 successful, 2 in progress, 24 queued; no failures.
+- PR #5 full CI [46151193651](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46151193651): 25 queued.
+- PR #6 full CI [46151958684](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46151958684): 1 successful, 1 in progress, 25 queued; both focused workflows remain queued.
+- PR #8 full CI [46152964192](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46152964192) and focused consensus [46152964218](https://github.com/Schmacko/freely-bitcoin-core./actions/runs/46152964218): still queued.
+- PR #10 and #12 fresh full/focused runs remain queued. No new-head failure was reported in these runs.
