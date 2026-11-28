@@ -830,3 +830,72 @@ The previous exact-head full CI run [45839153062](https://github.com/Schmacko/fr
 ### Merge and release decision
 
 No PR was merged this cycle. Do not merge while any required check is queued, cancelled, skipped or failed, or while dependencies/history are unresolved. Keep normal FREELY startup fail-closed. No production genesis activation, public network launch, DNS seeds, mining deployment, paid infrastructure or public exposure is authorized.
+
+
+---
+
+## Latest live snapshot — 28 November 2026, 13:33–13:49 UTC
+
+### Repository heads
+
+- `Schmacko/freely-core` default `main`: `710c05b84f7551d00b1316eedb6d11ca077e7f1f`.
+- `Schmacko/freely-bitcoin-core.` default `master`: `498b598cf27317b7306a859ce82b0571a0f9e348`.
+- Dedicated integration branch `freely/upstream-v32.1`: `40fda3525a323098e76b36a9f33a05a0b02f21e3` after PR #23 merged.
+
+### Active PR branches
+
+| PR | Branch | Exact head | Estimate | Current state |
+|---:|---|---|---:|---|
+| #2 | `m1-consensus-design` | `ef71a0c716c01be112cb8d1cbb7abec052815d49` | 85% | Open draft; documentation/coordination |
+| #4 | `freely/pow-difficulty-audit` | `8576438636fd79749a7048c55430d485e9a192d7` | 90% | Synchronized with CI baseline; full CI queued |
+| #5 | `freely/retarget-policy` | `eaa64a77dd28cf4366a057acf6753f66d0406fd1` | 95% | Synchronized with CI baseline; full CI queued |
+| #6 | `freely/retarget-test-vectors` | `5cbca965a9340f85631804a5fa5c827a3b79b015` | 90% | 26 commits behind updated base; reconcile CI overlap |
+| #8 | `freely/core-chain-implementation` | `370d4a436b7218e77de25dc296d14e01b38de589` | 75% | 1 commit behind updated base; ancestor check skipped historically |
+| #10 | `freely/network-safety-preflight` | `77106e215d5a04c4e6529650e3f8cbcb6a066e17` | 75% | 1 commit behind updated base; full CI has cancelled jobs |
+| #11 | `freely/wallet-node-readiness` | `86aeb0676c3bfd81fb896177cf3baedf0a558cad` | 70% | Focused pass; ancestor check skipped historically |
+| #12 | `freely/reconciled-docs` | `9d772339ab85fc38e2d67c591999c57aee11babd` | 95% | 1 commit behind updated base; revalidation required |
+| #17 | `freely/genesis-and-network-code` | `8a567e0f11a3405d62f52b4b3a7c89869f1d5ec3` | 85% | Focused pass; ancestor check skipped historically |
+| #18 | `freely/genesis-miner-implementation` | `8e81ea9fbf9c0b079bad1d14e8383cd36a4912b5` | 95% | Full CI 29/29 pass; depends on #17 |
+| #21 | `freely/private-node-startup` | `8423e716103ca6e64373f97e4763e8c62f447d71` | 89% | Older alternative lineage |
+| #22 | `freely/chainparams-reconciled-20261122` | `87e494b444889ae5aacd6b35fdd2313ed115115e` | 92% | Full CI 29/29 pass; depends on #17 |
+| #25 | `freely/private-node-integration-squashed-20261126` | `e46167bc48b2037fe8e368e7c64ce2ec5bdbb830` | 85% | Focused security/wallet passes; MSan/fuzz retry queued |
+| #26 | `freely/issuance-consensus-binding-20261126` | `a3a3042b2bbe7d33ff6f67004175dbe9a75f171b` | 85% | Full CI and ancestor replay running |
+
+PR #23 is merged and excluded from active-PR averages. PR #24 is superseded by #25 and excluded from active-PR averages.
+
+### CI and integration
+
+- PR #23 exact head `250d6657da43967240dacec246a45159bfc6cbb3`: full CI 29/29 success, including ancestor replay. CMake 4.5.0 Windows logs show the scoped `-Wno-error=non-target-directive` flag while retaining `-Werror=dev`; ancestor replay CTest 378/378 and functional tests passed. Merged into `freely/upstream-v32.1` at `40fda3525a323098e76b36a9f33a05a0b02f21e3`. The new merge-commit push run `46150997814` is queued.
+- PR #22 exact head `87e494b444889ae5aacd6b35fdd2313ed115115e`: full CI `45413263894` 29/29 success; focused core-chain run `45413263918` success.
+- PR #25 exact head `e46167bc48b2037fe8e368e7c64ce2ec5bdbb830`: private-node security `45832040167` and offline wallet `45832039994` success; MSan/fuzz retry attempt 4 queued as job `140996365407`.
+- PR #26 exact head `a3a3042b2bbe7d33ff6f67004175dbe9a75f171b`: full CI `46150590448` running; ancestor replay is running. No new-head C++ test pass is claimed.
+- PR #4 and #5 have been synchronized with the merged CMake baseline using merge commits `8576438636fd79749a7048c55430d485e9a192d7` and `eaa64a77dd28cf4366a057acf6753f66d0406fd1`. Their new full CI runs `46151185805` and `46151193651` are queued.
+- PR #6 full CI `45034083216` and PR #18 full CI `45204040649` are historical 29/29 passes. PR #6 is now 26 commits behind the integration base; PR #18 still depends on #17.
+- PR #8, #11 and #17 have successful overall CI conclusions but their one-commit ancestor jobs were skipped. Do not label skipped jobs as passes.
+- PR #10 has three cancelled jobs in its last full CI run. PR #12's last full CI run failed on CMake/ancestor checks. Both require reconciliation/revalidation.
+
+### Completion metrics
+
+| Phase | Estimate | Weight |
+|---|---:|---:|
+| Foundation | 100% | 5% |
+| Consensus specification | 92% | 15% |
+| Network architecture | 88% | 10% |
+| Core implementation | 65% | 25% |
+| Testing | 51% | 15% |
+| Wallet/node readiness | 45% | 10% |
+| Mining | 90% | 5% |
+| Security | 75% | 10% |
+| Testnet | 10% | 5% |
+| Production readiness | 0% | 5% |
+| **Weighted overall estimate** | **68.50%** | **100%** |
+
+- Active-PR branch mean: **86.1% across 14 branches**, down from 86.7% across 15 because PR #23 merged and is no longer active.
+- All scored feature-branch mean: **91.4% across 26 branches**, up from 91.2% across 26 after advancing merged PR #23's historical score from 95% to 100%. Nineteen of 45 FREELY refs remain unscored.
+- The weighted estimate is not a CI, merge or production-readiness score.
+
+### Merge and release
+
+Only PR #23 was merged, into the dedicated integration branch, not default `master`. No other PR currently meets all merge conditions. Normal FREELY startup remains fail-closed; candidate parameters remain offline-validation-only. No production genesis activation, public testnet/mainnet launch, DNS seeds, public mining, deployment, paid infrastructure or public exposure occurred.
+
+Detailed report: [ENGINEERING-UPDATE-2026-11-28-1333-UTC.md](ENGINEERING-UPDATE-2026-11-28-1333-UTC.md).
